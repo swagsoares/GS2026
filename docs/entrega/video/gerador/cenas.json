@@ -1,0 +1,48 @@
+{
+  "vozes": {"narrador": "Charon", "ia": "Kore", "antonio": "Algenib", "benedita": "Gacrux"},
+  "estilo": {
+    "narrador": "Narre em português do Brasil, como num documentário curto: voz calma, confiante e calorosa, ritmo natural, com pausas curtas entre as frases",
+    "ia": "Fale em português do Brasil como uma atendente de posto de saúde, com calma, carinho e frases claras",
+    "antonio": "Fale em português do Brasil como um senhor de 68 anos do interior, simples e educado, falando ao telefone",
+    "benedita": "Fale em português do Brasil como uma senhora de 72 anos, simpática, mandando um áudio no WhatsApp"
+  },
+  "segmentos": [
+    {"id": "s00", "visual": "slide:capa", "silencio": 3},
+    {"id": "s01", "visual": "slide:antonio", "texto": "O Seu Antônio tem sessenta e oito anos e quase não enxerga por causa do diabetes. Ele esperou três meses por uma consulta de vista. O posto mandou um SMS para confirmar. Ele não conseguiu ler. Faltou. E agora a regra diz que ele espera mais trinta dias para tentar de novo. O Seu Antônio não perdeu a consulta por descuido. Perdeu porque o serviço público fala uma língua que ele não consegue ouvir."},
+    {"id": "s02", "visual": "slide:problema", "texto": "E ele não está sozinho. São dezoito vírgula seis milhões de brasileiros com deficiência, e sete vírgula nove milhões têm dificuldade para enxergar. Vinte e nove por cento da população é analfabeta funcional. Vinte e oito milhões não usam internet. E sessenta e nove por cento das famílias das classes D e E ficam sem dados no celular antes do fim do mês. Enquanto isso, o serviço público aposta em SMS, aplicativo e site. Só dois vírgula nove por cento dos sites brasileiros passam em todos os testes de acessibilidade. O resultado aparece na fila: até trinta e oito vírgula seis por cento das consultas especializadas viram falta. Vaga paga, médico esperando, cadeira vazia."},
+    {"id": "s03", "visual": "slide:tese", "texto": "Nós criamos o ALCANCE. A ideia é simples: em vez de a pessoa se adaptar ao serviço, a inteligência artificial se adapta à pessoa e vai até ela."},
+    {"id": "s04", "visual": "slide:frentes", "texto": "Por três caminhos. Quem tem smartphone conversa pelo WhatsApp, em áudio ou texto. Quem tem celular simples, ou ficou sem internet, recebe uma ligação de voz. E quem não tem telefone recebe a visita do agente comunitário, que já existe no SUS: são duzentos e oitenta e cinco mil no Brasil. E cada pessoa tem um perfil de acessibilidade: voz mais lenta, linguagem simples, Libras."},
+    {"id": "s05", "visual": "still:demo_inicio", "texto": "Veja como funciona. O ALCANCE liga para o Seu Antônio. Esta conversa reproduz uma ligação real que fizemos com o protótipo."},
+    {"id": "s06", "visual": "dialogo:antonio"},
+    {"id": "s07", "visual": "still:antonio_fim", "texto": "Repare: quando ele disse que não tinha como ir, a IA não liberou a vaga. Ela resolveu o problema dele. E se apresentou em nome do posto que ele conhece, porque desconfiar de ligação é sinal de esperteza, não de atraso."},
+    {"id": "s08", "visual": "still:painel", "texto": "Na mesma hora, a gestora da UBS vê o resultado no painel: a consulta do Seu Antônio aparece no topo, com o transporte pedido."},
+    {"id": "s09", "visual": "still:benedita_inicio", "texto": "A Dona Benedita lê pouco. Ela fotografa uma carta que não entendeu e manda um áudio."},
+    {"id": "s10", "visual": "dialogo:benedita"},
+    {"id": "s11", "visual": "still:visitas", "texto": "E a agente Rosa sabe quem precisa de uma visita hoje, começando por quem não tem telefone."},
+    {"id": "s12", "visual": "slide:tecnologia", "texto": "Por trás disso: voz em tempo real com o Gemini, telefonia pela Twilio, e um modelo que prevê quem tem mais risco de faltar, treinado com cento e dez mil consultas reais do SUS."},
+    {"id": "s13", "visual": "slide:governanca", "texto": "Mas o que mais nos orgulha é a governança. Criamos uma bateria de testes com perguntas difíceis: emergência, pedido de CPF, tentativa de manipular a IA. Hoje passam dezesseis de dezesseis. E os testes encontraram erros de verdade: numa emergência, a IA disse que o SAMU era cento e doze. O certo é cento e noventa e dois. Corrigimos, e aprendemos que teste automático não substitui revisão humana."},
+    {"id": "s14", "visual": "still:governanca", "texto": "Medimos também o viés do modelo: ele quase não colocava idosos na fila de contato, porque na média eles faltam menos. Corrigimos: quem tem barreira de acesso sempre recebe contato. E ações que não têm volta ficam travadas no código até a pessoa confirmar."},
+    {"id": "s15", "visual": "slide:impacto", "texto": "Funciona? Num estudo com trezentos e seis pacientes no Hospital das Clínicas de Ribeirão Preto, as faltas caíram para nove e meio por cento com ligação, contra vinte e um por cento com SMS. Num município de cem mil habitantes, estimamos recuperar cerca de quatro mil e quinhentas consultas com especialista por ano, a trinta e dois reais por vaga recuperada."},
+    {"id": "s16", "visual": "slide:negocio", "texto": "Para a prefeitura, isso custa doze centavos por habitante por mês, com retorno estimado de três reais para cada real investido. E é o momento certo: a lei de linguagem simples, de 2025, obriga todo órgão público a falar de um jeito que todos entendam. E a prefeitura pode contratar um piloto pelo Marco Legal das Startups."},
+    {"id": "s17", "visual": "slide:fechamento", "texto": "Na semana que vem, o Seu Antônio vai à consulta. O carro da prefeitura passa às oito. A tecnologia certa não exige que a pessoa mude. Ela vai até a pessoa. ALCANCE. O serviço público que chega em você.", "cauda": 3}
+  ],
+  "dialogos": {
+    "antonio": [
+      ["ia", "Bom dia, seu Antônio. Aqui é o ALCANCE, da UBS Jardim Esperança. Tudo bem com o senhor?"],
+      ["antonio", "Tudo bem. Quem fala?"],
+      ["ia", "Sou a assistente do seu posto de saúde. O senhor tem consulta de vista nesta quinta, às nove da manhã. O senhor consegue ir?"],
+      ["antonio", "Ih, não tenho quem me leve, não."],
+      ["ia", "Entendi. Posso pedir o carro da prefeitura para buscar o senhor em casa. Quer que eu peça?"],
+      ["antonio", "Quero, sim. Deus lhe pague."],
+      ["ia", "Pronto. O carro passa às oito. Vou avisar sua vizinha também, e na quarta eu ligo de novo para lembrar."]
+    ],
+    "benedita": [
+      [null, ""],
+      ["benedita", "Chegou essa carta aqui, o que é isso?"],
+      ["ia", "Dona Benedita, essa carta pede para a senhora atualizar o seu cadastro no CRAS até 30 de novembro. Se não atualizar, o benefício pode ser bloqueado."],
+      ["ia", "É só levar o RG, o CPF e uma conta de luz. O CRAS mais perto fica na Rua das Flores, 120. Quer que eu marque um horário para a senhora?"],
+      ["benedita", "Quero, de manhã."],
+      ["ia", "Marquei para terça, às nove. Eu mando um áudio na segunda para lembrar."]
+    ]
+  }
+}
