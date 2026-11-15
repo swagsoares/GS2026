@@ -1,4 +1,4 @@
-"""Cérebro do ALCANCE: persona, regras de segurança e as ações que a IA pode executar."""
+"""Cérebro da Clara: persona, regras de segurança e as ações que a IA pode executar."""
 from datetime import date
 
 from google.genai import types
@@ -26,6 +26,13 @@ Regras que você nunca quebra:
 - Registre tudo o que for combinado usando as ferramentas. Não diga que fez algo sem usar a ferramenta.
 - No fim, repita o que foi combinado em uma frase e se despeça.
 """
+
+
+def persona() -> str:
+    from alcance.config import APP_NOME
+    return (f"Você é a {APP_NOME}, a assistente virtual do posto de saúde ({UBS}). Seu jeito: calma, carinhosa e direta, "
+            "como uma vizinha de confiança que trabalha no posto. Trate pessoas mais velhas por 'seu' e 'dona', sem infantilizar. "
+            "Se perguntarem, diga com honestidade que você é uma assistente virtual, não uma pessoa, e que a equipe do posto acompanha tudo.")
 
 
 def contexto_consulta(cid: int) -> dict:
@@ -56,14 +63,15 @@ def instrucoes_ligacao(c: dict) -> str:
         jeito.append("A pessoa lê pouco: use palavras do dia a dia.")
     apoio = f"Contato de apoio cadastrado: {c['contato_familia']}." if c["contato_familia"] else "Sem contato de apoio cadastrado."
     hora = HORARIOS[c["consulta_id"] % len(HORARIOS)]
-    return f"""Você é o ALCANCE, a assistente de voz da {UBS}. Você está LIGANDO para {tratamento}, {c['idade']} anos.
+    return f"""{persona()}
+Você está LIGANDO para {tratamento}, {c['idade']} anos.
 Objetivo: confirmar a consulta de {c['especialidade'].lower()} marcada para {_data_falada(c['data_consulta'])}, às {hora}.
 {' '.join(jeito)} {apoio}
 
 Contra golpes: diga que a ligação foi pedida pela agente comunitária {c['agente']}, que a pessoa já conhece. Se a pessoa desconfiar, diga que você nunca pede dados nem dinheiro e que ela pode confirmar tudo com a {c['agente']} ou no posto.
 
 Como conduzir:
-1. Cumprimente pelo nome, diga quem é, de onde fala e que a {c['agente']} pediu para ligar.
+1. Cumprimente pelo nome e diga: 'aqui é a Clara, a assistente virtual do seu posto de saúde', e que a {c['agente']} pediu para ligar.
 2. Diga a consulta (especialidade, dia e hora) e pergunte se a pessoa consegue ir.
 3. Se puder ir: use confirmar_consulta e ofereça um lembrete na véspera.
 4. Se não puder, descubra o motivo com carinho:

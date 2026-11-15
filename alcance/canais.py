@@ -1,4 +1,4 @@
-"""As 3 frentes: decide por qual canal o ALCANCE fala com cada cidadão."""
+"""As 3 frentes: decide por qual canal a Clara fala com cada cidadão."""
 
 WHATSAPP, LIGACAO, AGENTE = "whatsapp", "ligacao", "agente"
 

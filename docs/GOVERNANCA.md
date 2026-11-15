@@ -1,4 +1,4 @@
-# ALCANCE: governança de IA e conformidade
+# Clara: governança de IA e conformidade
 *Versão de 14/11/2026. As evidências ao vivo estão na página **Governança** do site (`/governanca`).*
 
 ## 1. O que a IA faz e o que ela não faz
@@ -10,14 +10,14 @@
 | Registra cada ação para auditoria | Não pede CPF, senha, cartão ou dados bancários |
 
 ## 2. Classificação de risco
-- **PL 2338/2023 (marco da IA no Brasil):** sistemas usados em saúde pedem cuidado redobrado. O ALCANCE **apoia a comunicação** e prioriza contatos, sem decisão clínica ou de acesso. Mesmo assim, adotamos as práticas de alto risco: avaliação de impacto, supervisão humana, registro e transparência.
+- **PL 2338/2023 (marco da IA no Brasil):** sistemas usados em saúde pedem cuidado redobrado. A Clara **apoia a comunicação** e prioriza contatos, sem decisão clínica ou de acesso. Mesmo assim, adotamos as práticas de alto risco: avaliação de impacto, supervisão humana, registro e transparência.
 - **NIST AI RMF:** organizamos a gestão nas 4 funções:
 
 | Função | O que fazemos |
 |---|---|
 | **Governar** | Regras escritas da IA ([ia.py](../alcance/ia.py)), compromissos públicos na página Governança, responsáveis definidos |
 | **Mapear** | Matriz de riscos ([CASO_DE_NEGOCIO.md](CASO_DE_NEGOCIO.md), seção 9), público vulnerável identificado (idosos, pessoas com deficiência, baixo letramento) |
-| **Medir** | Avaliação automática com 16 casos difíceis ([avaliacao.py](../alcance/avaliacao.py)), revisão humana das respostas, viés do modelo por grupo |
+| **Medir** | Avaliação automática com 17 casos difíceis ([avaliacao.py](../alcance/avaliacao.py)), revisão humana das respostas, viés do modelo por grupo |
 | **Gerenciar** | Travas no código para ações irreversíveis, troca automática de modelo, passagem para humano, registro de incidentes (seção 6) |
 
 ## 3. LGPD
@@ -47,8 +47,8 @@
 | Achado sobre SMS | Comparando consultas com a mesma espera (15 a 30 dias), faltam 29,8% com SMS e 36,9% sem. O SMS ajuda pouco. A comparação bruta (27,6% × 16,7%) engana, porque o SMS só vai para consultas marcadas com antecedência |
 
 ## 5. Avaliação do assistente
-- **16 casos** em 4 categorias: Segurança (emergência, CPF, tentativa de manipulação, sugestão paga, pedido de humano), Fundamentação (respostas da base e recusa quando a resposta não está nela), Ações (age só depois do "sim") e Acessibilidade (respostas curtas para pessoa surda, sem listas para quem recebe em áudio).
-- **Resultado atual:** 16/16, resposta média em ~3,6 s.
+- **17 casos** em 4 categorias: Segurança (emergência, CPF, tentativa de manipulação, sugestão paga, pedido de humano, **transparência: dizer que é assistente virtual**), Fundamentação (respostas da base e recusa quando a resposta não está nela), Ações (age só depois do "sim") e Acessibilidade (respostas curtas para pessoa surda, sem listas para quem recebe em áudio).
+- **Resultado atual:** 17/17, resposta média em ~2,9 s (15/11/2026).
 - **Processo:** conferência automática por regras **+ leitura humana de todas as respostas** a cada mudança nas regras ou nos modelos.
 
 ## 6. Registro de incidentes (encontrados nos testes)
@@ -63,9 +63,13 @@
 | 14/11 | Modelo de faltas **quase não alertava idosos** (2,4% × 48,9%) | Medição de viés por grupo | Piso de acessibilidade: quem tem barreira sempre entra na fila |
 | 14/11 | Probabilidades infladas (média de 59% para uma falta real de 20%) por causa do balanceamento de classes | Conferência do painel | Retreino sem balancear. Média caiu para 31%, coerente com consultas de especialista |
 | 14/11 | Análise sugeria que "o SMS aumenta faltas" | Revisão da análise | Fator de confusão (tempo de espera). Comparação refeita só entre esperas iguais |
+| 15/11 | Teste de transparência reprovava a resposta certa ("**não** sou uma pessoa de verdade") | Revisão humana do resultado | A regra do teste não via a negação. Regra corrigida: só reprova afirmações ("sou gente, sim") |
+| 15/11 | Resposta de 83 palavras para quem recebe em áudio | Avaliação automática | Limite explícito de 50 palavras |
+| 15/11 | Para ficar curta, a IA explicou o BPC mas não disse como pedir | Avaliação automática | Regra "corte os detalhes, nunca a resposta": responde primeiro o que foi perguntado |
+| 15/11 | A IA perguntou "quer que eu chame o transporte?" e **pediu na mesma resposta** | Avaliação automática | **Trava no código**: no WhatsApp, nenhuma ação passa sem um "sim" na fala da pessoa (teste `test_nao_age_sem_o_sim`) |
 
 ## 7. Limitações conhecidas
 - A transcrição de voz pode errar com sotaques fortes ou com chiado na linha. A IA pede para repetir.
 - Os serviços do município na base são fictícios.
 - Os custos da IA de voz vêm de tabelas de terceiros e precisam ser confirmados.
-- A avaliação cobre 16 casos. No piloto, ampliar para conversas reais revisadas por amostragem.
+- A avaliação cobre 17 casos. No piloto, ampliar para conversas reais revisadas por amostragem.

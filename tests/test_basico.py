@@ -101,7 +101,7 @@ def test_assistente_executa_acao_e_responde(tmp_path, monkeypatch):
     ])
     monkeypatch.setattr(assistente, "_cliente", lambda: None)
     monkeypatch.setattr(assistente, "_gerar", lambda *a, **k: next(respostas))
-    texto, acoes = assistente.responder(c, [], [types.Part(text="não tenho como ir")])
+    texto, acoes = assistente.responder(c, [], [types.Part(text="quero, sim, pode pedir o carro")])
     assert acoes == ["pedir_transporte"] and "Benedita" in texto
     assert "Dona Benedita" in assistente.instrucoes_mensagem(c)
     assert "vai virar ÁUDIO" in assistente.instrucoes_mensagem(c)  # baixo letramento -> resposta em voz
@@ -149,3 +149,24 @@ def test_piso_de_prioridade_para_quem_tem_barreira():
     assert not tem_barreira({**base, "idade": 70})
     assert tem_barreira({**base, "telefone": "basico"})
     assert tem_barreira({**base, "surdez": 1})
+
+
+def test_nao_age_sem_o_sim(tmp_path, monkeypatch):
+    """A IA tentou pedir o transporte quando a pessoa só disse que não tinha como ir: o código bloqueia."""
+    from types import SimpleNamespace as NS
+    from google.genai import types
+    from alcance import assistente, ia
+    path = tmp_path / "t.db"
+    db.criar_banco(path, n=10)
+    monkeypatch.setattr(ia, "conectar", lambda: db.conectar(path))
+    c = ia.contexto_consulta(3)
+    respostas = iter([
+        NS(function_calls=[NS(name="pedir_transporte", args={})],
+           candidates=[NS(content=types.Content(role="model", parts=[types.Part(text="...")]))], text=None),
+        NS(function_calls=None, text="Quer que eu peça o carro da prefeitura?"),
+    ])
+    monkeypatch.setattr(assistente, "_cliente", lambda: None)
+    monkeypatch.setattr(assistente, "_gerar", lambda *a, **k: next(respostas))
+    texto, acoes = assistente.responder(c, [], [types.Part(text="Não vou conseguir ir, não tenho como ir.")])
+    assert acoes == [] and "?" in texto
+    assert assistente.disse_sim("Quero, sim.") and not assistente.disse_sim("não tenho como ir")

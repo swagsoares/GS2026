@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Check, FileText, Mic, PhoneCall, PhoneOff, Play, RotateCcw, Volume2 } from 'lucide-react'
 import { nomeAcao, post, useApi } from '../lib/api'
+import Clara, { NOME } from '../components/Clara'
 
 type Fala = { quem: 'ia' | 'pessoa' | 'acao'; texto: string; tipo?: 'audio' | 'foto' }
 type Cena = {
@@ -20,13 +21,13 @@ const CENAS: Cena[] = [
     id: 'antonio',
     cid: 1,
     pessoa: 'Seu Antônio, 68 anos',
-    resumo: 'Baixa visão, celular simples, não lê SMS. O ALCANCE liga para ele.',
+    resumo: 'Baixa visão, celular simples, não lê SMS. A Clara liga para ele.',
     canal: 'ligacao',
-    contato: 'UBS Jardim Esperança',
+    contato: 'Clara · UBS Jardim Esperança',
     falas: [
-      { quem: 'ia', texto: 'Bom dia, seu Antônio. Aqui é o ALCANCE, da UBS Jardim Esperança. Tudo bem com o senhor?' },
-      { quem: 'pessoa', texto: 'Tudo bem. Quem fala?' },
-      { quem: 'ia', texto: 'Sou a assistente do seu posto de saúde. O senhor tem consulta de vista nesta quinta, às nove da manhã. O senhor consegue ir?' },
+      { quem: 'ia', texto: 'Oi, seu Antônio! Aqui é a Clara, assistente virtual do seu posto de saúde. A Rosa, sua agente de saúde, pediu pra eu ligar. Tudo bem com o senhor?' },
+      { quem: 'pessoa', texto: 'Tudo bem, minha filha.' },
+      { quem: 'ia', texto: 'O senhor tem consulta de vista nesta quinta, às nove da manhã. O senhor consegue ir?' },
       { quem: 'pessoa', texto: 'Ih, não tenho quem me leve, não.' },
       { quem: 'ia', texto: 'Entendi. Posso pedir o carro da prefeitura para buscar o senhor em casa. Quer que eu peça?' },
       { quem: 'pessoa', texto: 'Quero, sim. Deus lhe pague.' },
@@ -40,7 +41,7 @@ const CENAS: Cena[] = [
     pessoa: 'Dona Benedita, 72 anos',
     resumo: 'Lê pouco. Fotografa uma carta que não entendeu e recebe a explicação em áudio.',
     canal: 'whatsapp',
-    contato: 'ALCANCE',
+    contato: 'Clara',
     falas: [
       { quem: 'pessoa', texto: 'Carta do Cadastro Único', tipo: 'foto' },
       { quem: 'pessoa', texto: 'Chegou essa carta aqui, o que é isso?', tipo: 'audio' },
@@ -57,9 +58,9 @@ const CENAS: Cena[] = [
     pessoa: 'Júlia, 24 anos',
     resumo: 'Surda, a Libras é a primeira língua dela. Recebe texto curto e tradução em Libras.',
     canal: 'whatsapp',
-    contato: 'ALCANCE',
+    contato: 'Clara',
     falas: [
-      { quem: 'ia', texto: 'Oi, Júlia. Sua consulta é dia 20, às 14h, na UBS Centro. Você vai?' },
+      { quem: 'ia', texto: 'Oi, Júlia. Aqui é a Clara, do posto. Sua consulta é dia 20, às 14h. Você vai?' },
       { quem: 'pessoa', texto: 'nao posso dia 20 trabalho. pode trocar?' },
       { quem: 'ia', texto: 'Pode. Tenho dia 22 às 17h ou dia 23 às 8h. Qual é melhor?' },
       { quem: 'pessoa', texto: '22' },
@@ -99,7 +100,7 @@ function TelaLigacao({ cena, vistas, falando, segundos }: { cena: Cena; vistas: 
         <p className="text-sm opacity-70">Chamada de voz</p>
         <p className="mt-1 text-xl font-bold">{cena.contato}</p>
         <p className="mt-1 tabular-nums opacity-70">{String(Math.floor(segundos / 60)).padStart(2, '0')}:{String(segundos % 60).padStart(2, '0')}</p>
-        <div className="mt-4 flex justify-center"><Onda ativa={falando?.quem === 'ia'} /></div>
+        <div className="mt-4 flex flex-col items-center gap-3"><Clara tamanho={104} falando={falando?.quem === 'ia'} /><Onda ativa={falando?.quem === 'ia'} /></div>
       </div>
       <p className="mt-4 px-5 text-xs font-bold opacity-70">Legenda ao vivo</p>
       <div ref={caixa} className="mt-2 flex-1 space-y-3 overflow-y-auto px-5 pb-4" aria-live="polite">
@@ -110,7 +111,7 @@ function TelaLigacao({ cena, vistas, falando, segundos }: { cena: Cena; vistas: 
             </p>
           ) : (
             <p key={i} className={`entra text-[15px] leading-snug ${f.quem === 'ia' ? '' : 'text-piso'}`}>
-              <span className="font-bold">{f.quem === 'ia' ? 'ALCANCE: ' : `${cena.pessoa.split(',')[0]}: `}</span>{f.texto}
+              <span className="font-bold">{f.quem === 'ia' ? `${NOME}: ` : `${cena.pessoa.split(',')[0]}: `}</span>{f.texto}
             </p>
           ),
         )}
@@ -157,10 +158,10 @@ function TelaConversa({ cena, vistas }: { cena: Cena; vistas: Fala[] }) {
   return (
     <div className="flex h-full flex-col bg-nevoa">
       <div className="flex items-center gap-3 bg-papel px-4 pb-3 pt-8 shadow-sm">
-        <span className="piso grid size-9 place-items-center rounded-full text-sm font-extrabold">A</span>
+        <Clara tamanho={40} titulo="" />
         <div>
           <p className="font-bold">{cena.contato}</p>
-          <p className="text-xs text-tinta-suave">Assistente da sua cidade</p>
+          <p className="text-xs text-tinta-suave">Assistente do seu posto de saúde</p>
         </div>
       </div>
       <div ref={caixa} className="flex-1 space-y-2 overflow-y-auto p-3" aria-live="polite">
@@ -205,7 +206,7 @@ export default function Demo() {
         setAviso('Seu celular vai tocar em instantes. Atenda, aperte qualquer tecla depois do aviso e converse.')
       } else {
         await post(`/api/demo/perfil-whatsapp/${cena.cid}`)
-        setAviso(`Mande uma mensagem, um áudio ou a foto de uma carta para o WhatsApp do ALCANCE (+1 415 523 8886). Você está no papel de ${cena.pessoa.split(',')[0]}.`)
+        setAviso(`Mande uma mensagem, um áudio ou a foto de uma carta para o WhatsApp da Clara (+1 415 523 8886). Você está no papel de ${cena.pessoa.split(',')[0]}.`)
       }
       setReal(true)
     } catch {
@@ -226,10 +227,10 @@ export default function Demo() {
     <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_420px] lg:items-start">
       <div>
         <h1 className="max-w-xl text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
-          Cada pessoa é atendida do jeito que consegue.
+          A Clara atende cada pessoa do jeito que ela consegue.
         </h1>
         <p className="mt-4 max-w-xl text-lg text-tinta-suave">
-          Escolha uma pessoa e veja o ALCANCE em ação: por ligação, para quem não lê, ou pelo WhatsApp, em áudio ou texto simples.
+          Escolha uma pessoa e veja a Clara em ação: por ligação, para quem não lê, ou pelo WhatsApp, em áudio ou texto simples.
         </p>
 
         <div role="radiogroup" aria-label="Escolha uma pessoa" className="mt-8 space-y-2">

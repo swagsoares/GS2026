@@ -1,10 +1,10 @@
-# ALCANCE: caso de negócio
+# Clara: caso de negócio
 *Versão de 14/11/2026. Os números marcados com **(premissa)** são estimativas nossas e precisam de validação num piloto. Os demais vêm das fontes indicadas. Câmbio usado: US$ 1 = R$ 5,56 (BCB, 11/11/2026).*
 
 ---
 
 ## 1. Resumo executivo
-O serviço público se comunica por SMS, sites e aplicativos, e isso exclui quem não enxerga, não lê bem ou não tem internet. O resultado são **consultas perdidas e direitos não usados**. O **ALCANCE** é uma IA que vai até o cidadão pelo canal que ele consegue usar (**WhatsApp por áudio, ligação de voz ou visita do agente comunitário**) e se adapta à deficiência de cada pessoa.
+O serviço público se comunica por SMS, sites e aplicativos, e isso exclui quem não enxerga, não lê bem ou não tem internet. O resultado são **consultas perdidas e direitos não usados**. O **Clara** é uma IA que vai até o cidadão pelo canal que ele consegue usar (**WhatsApp por áudio, ligação de voz ou visita do agente comunitário**) e se adapta à deficiência de cada pessoa.
 
 **Num município de 100 mil habitantes (premissa):**
 
@@ -63,13 +63,13 @@ O serviço público se comunica por SMS, sites e aplicativos, e isso exclui quem
 | Mensagem de WhatsApp de utilidade (lembrete) | ~US$ 0,008 ≈ R$ 0,045 | Tabelas da Meta via parceiros |
 | **Ligação típica de 2 min** | **≈ R$ 1,30** | Cálculo |
 | **Conversa típica no WhatsApp** | **≈ R$ 0,10** | Cálculo |
-| Visita do agente | R$ 0 a mais (o agente já faz visitas; o ALCANCE só ordena a lista) | — |
+| Visita do agente | R$ 0 a mais (o agente já faz visitas; a Clara só ordena a lista) | — |
 
 ## 6. Cenário: município de 100 mil habitantes
 **Premissas:**
 - 0,5 consulta especializada por habitante por ano (parâmetro da Portaria GM/MS 1.101/2002) = **~4.170 consultas/mês**.
 - 30% de faltas = **~1.250 faltas/mês** (entre a média nacional de 25% e os 38,6% do ES).
-- O ALCANCE contata 50% das consultas (as de maior risco) = 2.085 contatos/mês.
+- A Clara contata 50% das consultas (as de maior risco) = 2.085 contatos/mês.
   - Distribuição: 70% WhatsApp, 25% ligação, 5% agente (inspirada na TIC Domicílios).
 - **Redução conservadora de 30% nas faltas** (o estudo de Ribeirão Preto mostrou ~58%).
 - Valor de referência por vaga: **R$ 100** (faixa de R$ 80 a 120 de uma consulta especializada popular; o SUS paga ~R$ 10 pela tabela, o que subestima o custo real).
@@ -123,7 +123,7 @@ O serviço público se comunica por SMS, sites e aplicativos, e isso exclui quem
 | Exclusão de quem não tem telefone | A terceira frente: agente comunitário |
 | Dependência de fornecedores (Google, Twilio) | Arquitetura com troca de modelo e de provedor; o modelo de voz já tem reserva automática |
 | Integração com sistemas legados (SISREG, e-SUS) | Começar por exportação de planilha; depois, integração |
-| Resistência das equipes | Desenho junto com agentes e gestores; o ALCANCE **apoia** o agente, não substitui |
+| Resistência das equipes | Desenho junto com agentes e gestores; a Clara **apoia** o agente, não substitui |
 
 ## 10. Indicadores (como provamos que funciona)
 - Taxa de faltas (antes × depois, UBS piloto × UBS de comparação)

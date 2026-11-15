@@ -73,7 +73,7 @@ def processar(form: dict):
         return
     historico = _historico(c["consulta_id"])
     _salvar_fala(c["consulta_id"], "pessoa", registro)
-    texto, acoes = assistente.responder(c, historico, partes)
+    texto, acoes = assistente.responder(c, historico, partes, fala_da_pessoa=registro)
     for a in acoes:
         _salvar_fala(c["consulta_id"], "acao", a)
     _salvar_fala(c["consulta_id"], "ia", texto)

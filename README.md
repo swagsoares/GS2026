@@ -1,8 +1,8 @@
-# 🤝 ALCANCE: o serviço público que chega em você
+# 🤝 Clara: o serviço público que chega em você
 **Global Solution 2026.2 · FIAP · Desafio CitizenTech**  
 Equipe: Vitor Soares Gonçalves (RM 566181) e Pietro Boroto (RM 562407)
 
-O serviço público foi desenhado para quem enxerga, ouve, lê bem e tem internet. O ALCANCE inverte isso: **a IA se adapta à pessoa e vai até ela** por 3 frentes:
+O serviço público foi desenhado para quem enxerga, ouve, lê bem e tem internet. A Clara inverte isso: **a IA se adapta à pessoa e vai até ela** por 3 frentes:
 
 | Frente | Para quem |
 |---|---|
@@ -10,8 +10,8 @@ O serviço público foi desenhado para quem enxerga, ouve, lê bem e tem interne
 | ☎️ Ligação de voz com IA | Celular simples, sem dados no fim do mês, não lê |
 | 🧑‍⚕️ Agente comunitário | Não tem telefone |
 
-**Comece por aqui:** [Documento do projeto](docs/DOCUMENTO_DO_PROJETO.md) (as 6 perguntas do desafio) · **Documentação ABNT:** [PDF](docs/entrega/ALCANCE_Documentacao_ABNT.pdf) · [Word](docs/entrega/ALCANCE_Documentacao_ABNT.docx)
-Mais: [Caso de negócio](docs/CASO_DE_NEGOCIO.md) · [Governança da IA](docs/GOVERNANCA.md) · [Roteiro do pitch](docs/ROTEIRO_PITCH.md) · [Dados e fontes](PESQUISA.md) · [Plano de trabalho](PLANO_GS.md)
+**Comece por aqui:** [Documento do projeto](docs/DOCUMENTO_DO_PROJETO.md) (as 6 perguntas do desafio) · **Documentação ABNT:** [PDF](docs/entrega/Clara_Documentacao_ABNT.pdf) · [Word](docs/entrega/Clara_Documentacao_ABNT.docx)
+Mais: [Persona Clara](docs/PERSONA_CLARA.md) · [Caso de negócio](docs/CASO_DE_NEGOCIO.md) · [Governança da IA](docs/GOVERNANCA.md) · [Roteiro do pitch](docs/ROTEIRO_PITCH.md) · [Dados e fontes](PESQUISA.md) · [Plano de trabalho](PLANO_GS.md)
 
 ## Como rodar
 1. Copie `.env.example` para `.env` e preencha as chaves (Gemini e Twilio). O `.env` nunca vai para o git.
@@ -45,7 +45,7 @@ A Twilio precisa alcançar a API no seu computador, então abra um túnel públi
 ```bash
 .venv\Scripts\python -m alcance.avaliacao
 ```
-A avaliação roda 16 casos (segurança, fundamentação, ações, acessibilidade) contra o Gemini e grava o resultado, que aparece na tela de Governança.
+A avaliação roda 17 casos (segurança, fundamentação, ações, acessibilidade) contra o Gemini e grava o resultado, que aparece na tela de Governança.
 
 ### Modelo de risco de falta (dados reais do SUS)
 1. Baixe o dataset [Medical Appointment No Shows](https://www.kaggle.com/datasets/joniarroba/noshowappointments) (~110 mil consultas, Vitória/ES).

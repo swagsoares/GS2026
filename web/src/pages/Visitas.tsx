@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Check, Users } from 'lucide-react'
 import { quando, useApi, type Consulta } from '../lib/api'
 import { Aviso, BarraRisco, Modos } from '../components/Pecas'
+import Clara from '../components/Clara'
 
 export default function Visitas() {
   const { dados, erro } = useApi<Consulta[]>('/api/consultas')
@@ -26,7 +27,7 @@ export default function Visitas() {
     })
 
   return (
-    <div className="max-w-2xl">
+    <div className="max-w-3xl">
       <p className="font-medium text-tinta-suave">Quem não tem telefone recebe uma visita</p>
       <h1 className="mt-2 text-4xl font-extrabold leading-[1.1] tracking-tight">
         {restantes === 0 ? 'Todas as visitas de hoje foram feitas.' : `${agente}, você tem ${restantes} ${restantes === 1 ? 'visita' : 'visitas'} hoje.`}
@@ -46,11 +47,16 @@ export default function Visitas() {
         ))}
       </div>
 
-      <ol className="mt-8 border-t-2 border-tinta">
+      <p className="mt-6 flex items-center gap-3 rounded-2xl bg-marinho p-4 text-white">
+        <Clara tamanho={44} fundo="#F5C400" titulo="" />
+        <span><strong>A Clara organizou a sua lista.</strong> <span className="text-white/75">Primeiro quem não tem telefone e tem consulta mais cedo. Ela já falou com os outros por ligação ou WhatsApp.</span></span>
+      </p>
+
+      <ol className="mt-6 rounded-2xl border border-linha/70 bg-papel p-6 shadow-[0_1px_3px_rgb(16_24_40/0.05)] py-1">
         {visitas.map((v, i) => {
           const feita = feitas.has(v.consulta_id)
           return (
-            <li key={v.consulta_id} className={`flex flex-wrap gap-4 border-b border-linha py-5 sm:flex-nowrap ${feita ? 'opacity-55' : ''}`}>
+            <li key={v.consulta_id} className={`flex flex-wrap gap-4 border-b border-linha/60 py-5 last:border-0 sm:flex-nowrap ${feita ? 'opacity-55' : ''}`}>
               <span className="mt-0.5 w-6 shrink-0 text-lg font-extrabold tabular-nums text-tinta-suave">{i + 1}</span>
               <div className="min-w-0 flex-1">
                 <p className={`text-lg font-bold ${feita ? 'line-through' : ''}`}>{v.nome}, {v.idade} anos</p>

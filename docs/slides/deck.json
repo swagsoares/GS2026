@@ -3,7 +3,7 @@
   "createdOnFiles": {"v": 1, "at": "2026-11-14T21:00:00Z"},
   "lists": "css",
   "format": {"v": 1, "shared": ["project/deck.css"]},
-  "title": "ALCANCE: pitch GS 2026",
+  "title": "Clara: pitch GS 2026",
   "order": ["capa", "antonio", "problema", "tese", "frentes", "demo", "tecnologia", "governanca", "impacto", "negocio", "fechamento"],
   "sections": {
     "s1": {"description": "A história do Seu Antônio e o problema em números.", "start": "capa"},

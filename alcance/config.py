@@ -2,7 +2,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-APP_NOME = "ALCANCE"  # trocar o nome do produto aqui
+APP_NOME = "Clara"  # nome da persona e do produto: trocar aqui
 APP_SLOGAN = "O serviço público que chega em você"
 
 RAIZ = Path(__file__).resolve().parent.parent

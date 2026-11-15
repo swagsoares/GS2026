@@ -12,7 +12,7 @@ from google import genai
 from google.genai import types
 
 from alcance.canais import modo_resposta
-from alcance.ia import FERRAMENTAS, REGRAS, UBS, executar_acao, _data_falada, HORARIOS
+from alcance.ia import FERRAMENTAS, REGRAS, UBS, executar_acao, _data_falada, HORARIOS, persona
 
 log = logging.getLogger("alcance.assistente")
 CONHECIMENTO = (Path(__file__).parent / "conhecimento.md").read_text(encoding="utf-8")
@@ -61,7 +61,8 @@ def instrucoes_mensagem(c: dict) -> str:
         jeito.append("A pessoa é surda e tem a Libras como primeira língua: use frases muito curtas e diretas, português simples, "
                      "uma ideia por frase. Ofereça a tradução em Libras pelo site quando ajudar.")
     hora = HORARIOS[c["consulta_id"] % len(HORARIOS)]
-    return f"""Você é o ALCANCE, assistente da {UBS}, conversando por WhatsApp com {tratamento}, {c['idade']} anos.
+    return f"""{persona()}
+Você está conversando por WhatsApp com {tratamento}, {c['idade']} anos.
 Agente comunitária da pessoa: {c['agente']}.
 Consulta marcada: {c['especialidade'].lower()} em {_data_falada(c['data_consulta'])}, às {hora}. Situação: {c['status']}.
 {' '.join(jeito)}
@@ -70,15 +71,28 @@ Você ajuda com: a consulta (confirmar, remarcar, transporte, liberar vaga), exp
 (diga em 2 ou 3 frases o que a carta pede, até quando e o que levar) e tirar dúvidas sobre direitos, usando SÓ a base abaixo.
 Ao citar a fonte, use o nome que está no título do bloco (por exemplo "a LOAS", "o Estatuto da Pessoa Idosa"). Nunca atribua a informação a outro bloco.
 Se a resposta não estiver na base, diga que não tem certeza e ofereça falar com a equipe (encaminhar_para_humano). Nunca invente lei, valor ou prazo.
-Responda em no máximo 3 frases curtas. Termine com uma pergunta simples quando houver um próximo passo.
+Responda em no máximo 3 frases curtas, com no máximo 50 palavras no total, mesmo quando pedirem "direitinho". Responda primeiro exatamente o que foi perguntado (se perguntarem "como faço", diga como fazer, com o telefone ou o lugar); corte os detalhes, nunca a resposta. Termine com uma pergunta simples quando houver um próximo passo.
 {REGRAS}
 
 BASE DE CONHECIMENTO:
 {CONHECIMENTO}"""
 
 
-def responder(c: dict, historico: list[tuple[str, str]], partes: list[types.Part]) -> tuple[str, list[str]]:
-    """Gera a resposta. historico: [(quem, texto)]. Retorna (texto, ações executadas)."""
+# "Primeiro oferece, depois faz" não pode depender só do prompt: a avaliação pegou a IA perguntando
+# "quer que eu chame o transporte?" e pedindo o transporte na mesma resposta. Agora o código confere.
+_SIM = re.compile(r"\b(sim|quero|pode|podem|isso|claro|ok|okay|aceito|por favor|beleza|t[aá] bom|combinado|confirmo|pode ser|quero sim)\b", re.I)
+SEM_PRECISAR_DE_SIM = {"encaminhar_para_humano"}  # pedir um humano já é o pedido explícito
+
+
+def disse_sim(fala: str) -> bool:
+    return bool(_SIM.search(fala or ""))
+
+
+def responder(c: dict, historico: list[tuple[str, str]], partes: list[types.Part], fala_da_pessoa: str | None = None) -> tuple[str, list[str]]:
+    """Gera a resposta. historico: [(quem, texto)]. Retorna (texto, ações executadas).
+    fala_da_pessoa: o que a pessoa disse agora (texto ou transcrição do áudio), para conferir o "sim" antes de agir."""
+    if fala_da_pessoa is None:
+        fala_da_pessoa = " ".join(p.text for p in partes if getattr(p, "text", None))
     cliente = _cliente()
     conteudos = [types.Content(role="user" if q == "pessoa" else "model", parts=[types.Part(text=t)])
                  for q, t in historico[-12:] if q in ("pessoa", "ia")]
@@ -94,8 +108,11 @@ def responder(c: dict, historico: list[tuple[str, str]], partes: list[types.Part
         conteudos.append(r.candidates[0].content)
         respostas = []
         for f in chamadas:
-            res = executar_acao(c["consulta_id"], c["id"], "whatsapp", f.name, dict(f.args or {}))
-            acoes.append(f.name)
+            if f.name not in SEM_PRECISAR_DE_SIM and not disse_sim(fala_da_pessoa):
+                res = {"ok": False, "mensagem": "Bloqueado: a pessoa ainda não disse sim. Ofereça e espere a resposta antes de fazer."}
+            else:
+                res = executar_acao(c["consulta_id"], c["id"], "whatsapp", f.name, dict(f.args or {}))
+                acoes.append(f.name)
             respostas.append(types.Part.from_function_response(name=f.name, response=res))
         conteudos.append(types.Content(role="user", parts=respostas))
     return "Registrei seu pedido. A equipe da UBS vai confirmar com você.", acoes

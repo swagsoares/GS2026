@@ -1,9 +1,9 @@
-# ALCANCE: o serviço público que chega em você
+# Clara: o serviço público que chega em você
 **Global Solution 2026.2 · FIAP · Desafio CitizenTech** · Equipe: Vitor Soares Gonçalves (RM 566181) e Pietro Boroto (RM 562407)
 
-> O serviço público foi desenhado para quem enxerga, ouve, lê bem e tem internet. O ALCANCE inverte essa lógica: **a IA se adapta à pessoa e vai até ela.**
+> O serviço público foi desenhado para quem enxerga, ouve, lê bem e tem internet. A Clara inverte essa lógica: **a IA se adapta à pessoa e vai até ela.**
 
-Documentos de apoio: [Caso de negócio](CASO_DE_NEGOCIO.md) · [Governança da IA](GOVERNANCA.md) · [Roteiro do pitch](ROTEIRO_PITCH.md) · [Dados e fontes](../PESQUISA.md)
+Documentos de apoio: [Persona Clara](PERSONA_CLARA.md) · [Caso de negócio](CASO_DE_NEGOCIO.md) · [Governança da IA](GOVERNANCA.md) · [Roteiro do pitch](ROTEIRO_PITCH.md) · [Dados e fontes](../PESQUISA.md)
 
 ---
 
@@ -28,7 +28,7 @@ O Seu Antônio não é exceção:
 ### 2.1 Quem é o cidadão beneficiado?
 Quem o serviço digital deixa de fora: **pessoas com deficiência** (visual, auditiva), **idosos**, **pessoas com baixa alfabetização** e **quem não tem internet ou smartphone**. Personas do protótipo (todas fictícias):
 
-| Persona | Situação | Como o ALCANCE chega |
+| Persona | Situação | Como a Clara chega |
 |---|---|---|
 | **Seu Antônio**, 68 | Baixa visão, celular de botão, sem dados | Ligação de voz com IA |
 | **Dona Benedita**, 72 | Smartphone, lê pouco | WhatsApp em áudio, com voz mais lenta |
@@ -56,6 +56,8 @@ A regra que escolhe a frente está em [`alcance/canais.py`](../alcance/canais.py
 Cada cidadão tem um **perfil de acessibilidade** (voz mais lenta, linguagem simples, Libras, contato da família), e a IA o usa em toda conversa.
 
 **O que a IA faz na conversa:** confirma a consulta, remarca, pede o transporte da prefeitura, avisa um familiar, agenda lembrete, explica uma carta e tira dúvidas de direitos citando a fonte. **Cada ação atualiza o painel da UBS na hora**, e a vaga só é liberada quando a pessoa diz claramente que não quer ir.
+
+**A persona.** A solução se apresenta como a **Clara**, assistente virtual do posto de saúde, com nome e rosto, como a Lu, do Magalu, ou a BIA, do Bradesco. Para um idoso, "aqui é a Clara, do seu posto, a Rosa pediu pra eu ligar" é algo que ele reconhece e pode confirmar no posto, o que também protege contra golpes. O nome vem de "falar claro" (Lei da Linguagem Simples). Ela é uma ilustração, não uma pessoa real, e diz que é assistente virtual quando perguntam. Detalhes em [PERSONA_CLARA.md](PERSONA_CLARA.md).
 
 ### 2.4 Quem participa do ecossistema?
 - **Cidadão e família** (contato de apoio)
@@ -92,7 +94,7 @@ Nos dados reais do SUS, o SMS ajuda pouco: com a mesma espera (15 a 30 dias), ai
 ## 3. Governança e IA responsável
 Detalhes em [GOVERNANCA.md](GOVERNANCA.md). O essencial:
 - **A IA não decide sozinha o que é irreversível.** Liberar a vaga exige a confirmação da pessoa, e isso é verificado no código, não só no prompt.
-- **Avaliação automática:** 16 casos de teste em 4 categorias (segurança, fundamentação, ações, acessibilidade). Resultado atual: **16/16**. A avaliação já pegou 2 erros reais, que corrigimos: a IA liberava a vaga quando a pessoa dizia "não consigo ir" e, uma vez, citou o número errado do SAMU.
+- **Avaliação automática:** 17 casos de teste em 4 categorias (segurança, fundamentação, ações, acessibilidade). Resultado atual: **17/17**. A avaliação já pegou 2 erros reais, que corrigimos: a IA liberava a vaga quando a pessoa dizia "não consigo ir" e, uma vez, citou o número errado do SAMU.
 - **Viés medido e corrigido:** o modelo de faltas quase não alertava idosos (2,4% contra 48,9% dos adultos jovens), porque na média eles faltam menos. Quem tem barreira de acesso agora sempre entra na fila de contato.
 - **LGPD:** coleta mínima, nunca pede CPF, e CPF, cartão ou telefone digitados são mascarados antes de ir para a IA. Protótipo só com pessoas fictícias.
 - **Proteção contra golpe:** na ligação, a IA se identifica pelo nome da agente comunitária que a pessoa já conhece e nunca pede dados ou pagamento.

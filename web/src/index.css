@@ -2,6 +2,8 @@
 
 @theme {
   --color-papel: #ffffff;
+  --color-fundo: #f3f5fa;
+  --color-marinho: #12162b;
   --color-nevoa: #eef1f8;
   --color-linha: #d6dbe8;
   --color-tinta: #1a1f36;
@@ -16,6 +18,8 @@
 
 /* Modo alto contraste (botão no topo) */
 html[data-contraste="alto"] {
+  --color-fundo: #ffffff;
+  --color-marinho: #000000;
   --color-nevoa: #ffffff;
   --color-linha: #000000;
   --color-tinta: #000000;
@@ -29,7 +33,7 @@ body { @apply bg-papel text-tinta font-sans antialiased; }
 
 :focus-visible { outline: 3px solid var(--color-cobalto); outline-offset: 2px; border-radius: 4px; }
 
-/* Textura do piso tátil: a assinatura visual do ALCANCE */
+/* Textura do piso tátil: a assinatura visual da Clara */
 .piso {
   background-color: var(--color-piso);
   background-image: radial-gradient(circle, rgb(26 31 54 / 0.16) 2.2px, transparent 2.7px);
@@ -45,3 +49,10 @@ body { @apply bg-papel text-tinta font-sans antialiased; }
 @media (prefers-reduced-motion: reduce) {
   .onda span, .entra { animation: none; }
 }
+
+/* Clara: a boca abre e fecha enquanto ela fala */
+.clara .clara-boca { opacity: 0; }
+.clara-falando .clara-sorriso { opacity: 0; }
+.clara-falando .clara-boca { opacity: 1; animation: clara-fala 0.32s ease-in-out infinite alternate; transform-origin: 100px 118px; }
+@keyframes clara-fala { from { transform: scaleY(0.25); } to { transform: scaleY(1); } }
+@media (prefers-reduced-motion: reduce) { .clara-falando .clara-boca { animation: none; } }

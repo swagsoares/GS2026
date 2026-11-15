@@ -20,7 +20,7 @@ const COMPROMISSOS = [
   ['Respostas com fonte', 'Dúvidas sobre direitos são respondidas só com a base de conhecimento, citando a lei. Fora dela, a IA diz que não tem certeza.'],
   ['LGPD', 'Base legal de execução de política pública (art. 7º, III e art. 11, II, b). Coleta mínima, nunca pede CPF, senha ou dados bancários. O protótipo usa apenas pessoas fictícias.'],
   ['Linguagem simples e acessível', 'Segue a Lei 15.263/2025 e a Lei Brasileira de Inclusão: voz, texto curto, Libras (VLibras) e ritmo mais lento quando a pessoa precisa.'],
-  ['Risco do sistema', 'Pelo PL 2338/2023, o ALCANCE prioriza contatos, mas não decide quem é atendido. O modelo só ordena a fila de ligações. Gestão de riscos segue as funções do NIST AI RMF: governar, mapear, medir e gerenciar.'],
+  ['Risco do sistema', 'Pelo PL 2338/2023, a Clara prioriza contatos, mas não decide quem é atendido. O modelo só ordena a fila de ligações. Gestão de riscos segue as funções do NIST AI RMF: governar, mapear, medir e gerenciar.'],
 ]
 
 export default function Governanca() {
@@ -44,7 +44,7 @@ export default function Governanca() {
       )}
 
       {av && (
-        <section aria-labelledby="cat" className="mt-10">
+        <section aria-labelledby="cat" className="mt-10 rounded-2xl border border-linha/70 bg-papel p-6 shadow-[0_1px_3px_rgb(16_24_40/0.05)]">
           <h2 id="cat" className="text-lg font-bold">Resultado por tipo de teste</h2>
           <ul className="mt-3 grid gap-3 sm:grid-cols-4">
             {Object.entries(av.por_categoria).map(([cat, r]) => (
@@ -75,7 +75,7 @@ export default function Governanca() {
         </section>
       )}
 
-      <section aria-labelledby="erro" className="mt-12 border-l-4 border-piso bg-nevoa p-6">
+      <section aria-labelledby="erro" className="mt-6 rounded-2xl border border-linha/70 bg-papel p-6 shadow-[0_1px_3px_rgb(16_24_40/0.05)] border-l-8 border-l-piso">
         <h2 id="erro" className="text-lg font-bold">Erros que a avaliação encontrou e corrigimos</h2>
         <p className="mt-2">
           <strong>A vaga liberada sem perguntar.</strong> Quando a pessoa dizia &quot;não vou conseguir ir, não tenho como ir&quot;, a IA liberava a vaga
@@ -93,9 +93,14 @@ export default function Governanca() {
           dificuldade com SMS. Agora, quem tem barreira real de acesso (baixa visão, surdez, pouca leitura ou sem smartphone), em qualquer idade,{' '}
           <strong>sempre entra na fila de contato</strong>. O modelo só ordena a fila, não decide quem fica de fora.
         </p>
+        <p className="mt-3">
+          <strong>Perguntou e já fez.</strong> Depois de virar a Clara, a avaliação pegou a IA perguntando &quot;quer que eu chame o transporte?&quot; e
+          pedindo o transporte na mesma resposta, sem esperar o &quot;sim&quot;. A regra estava no prompt e não bastou. Agora o <strong>código</strong> confere:
+          nenhuma ação passa se a pessoa não tiver dito &quot;sim&quot;, &quot;quero&quot; ou &quot;pode&quot;. Há um teste automático para isso.
+        </p>
       </section>
 
-      <section aria-labelledby="modelo" className="mt-12">
+      <section aria-labelledby="modelo" className="mt-6 rounded-2xl border border-linha/70 bg-papel p-6 shadow-[0_1px_3px_rgb(16_24_40/0.05)]">
         <h2 id="modelo" className="text-lg font-bold">Modelo que prevê faltas</h2>
         {m ? (
           <>
@@ -136,7 +141,7 @@ export default function Governanca() {
         )}
       </section>
 
-      <section aria-labelledby="audit" className="mt-12">
+      <section aria-labelledby="audit" className="mt-6 rounded-2xl border border-linha/70 bg-papel p-6 shadow-[0_1px_3px_rgb(16_24_40/0.05)]">
         <h2 id="audit" className="text-lg font-bold">Trilha de auditoria</h2>
         <p className="mt-2 text-tinta-suave">
           Toda ação da IA fica registrada. {dados.acoes_total} ações até agora, {dados.passados_para_humano} passadas para a equipe.
@@ -156,7 +161,7 @@ export default function Governanca() {
         )}
       </section>
 
-      <section aria-labelledby="comp" className="mt-12">
+      <section aria-labelledby="comp" className="mt-6 rounded-2xl border border-linha/70 bg-papel p-6 shadow-[0_1px_3px_rgb(16_24_40/0.05)]">
         <h2 id="comp" className="text-lg font-bold">Nossos compromissos</h2>
         <dl className="mt-4 grid gap-x-8 gap-y-5 sm:grid-cols-2">
           {COMPROMISSOS.map(([t, d]) => (

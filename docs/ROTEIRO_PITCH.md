@@ -1,4 +1,4 @@
-# ALCANCE: roteiro do vídeo pitch (até 7 minutos)
+# Clara: roteiro do vídeo pitch (até 7 minutos)
 *Ritmo: ~130 palavras por minuto. O texto da narração tem cerca de 860 palavras, então cabe em 6min40s com respiro.*
 *Legenda: 🎙️ narração · 🖥️ o que aparece na tela · 🎬 instrução de gravação*
 
@@ -16,9 +16,11 @@ Enquanto isso, o serviço público aposta em SMS, aplicativo e site. Só 2,9% do
 O resultado aparece na fila: até 38,6% das consultas especializadas viram falta. Vaga paga, médico esperando, cadeira vazia. E do outro lado, alguém na fila que poderia ter sido atendido."
 
 ## Cena 3: A solução (1:35–2:15) · Slides 4 e 5
-🎙️ "Nós criamos o ALCANCE. A ideia é simples: em vez de a pessoa se adaptar ao serviço, a inteligência artificial se adapta à pessoa e vai até ela.
-Por três caminhos. Quem tem smartphone conversa pelo WhatsApp, em áudio ou texto. Quem tem celular simples, ou ficou sem internet, recebe uma ligação de voz. E quem não tem telefone recebe a visita do agente comunitário, que já existe no SUS: são 285 mil no Brasil. O ALCANCE diz a ele quem visitar primeiro.
+🎙️ "Nós criamos a Clara. A ideia é simples: em vez de a pessoa se adaptar ao serviço, a inteligência artificial se adapta à pessoa e vai até ela.
+Por três caminhos. Quem tem smartphone conversa pelo WhatsApp, em áudio ou texto. Quem tem celular simples, ou ficou sem internet, recebe uma ligação de voz. E quem não tem telefone recebe a visita do agente comunitário, que já existe no SUS: são 285 mil no Brasil. A Clara diz a ele quem visitar primeiro.
 E cada pessoa tem um perfil de acessibilidade: voz mais lenta, linguagem simples, Libras."
+🖥️ Página inicial do site ("Oi, eu sou a Clara").
+🎙️ "A Clara é uma persona, como a Lu ou a BIA: tem nome e rosto para que as pessoas confiem e lembrem dela. Mas ela nunca finge ser gente. Se perguntarem, diz que é uma assistente virtual."
 
 ## Cena 4: Demo ao vivo (2:15–4:45) · Slide 6 e depois tela cheia
 🎬 Gravar a tela do site em "Como o cidadão vê" + o celular real ao lado (dá para filmar com outro celular). Clicar em **"Receber a ligação de verdade"**.
@@ -50,7 +52,7 @@ E é o momento certo: a Lei 15.263, de 2025, obriga todo órgão público a usar
 ## Cena 7: Fechamento (6:30–7:00) · Slide 11
 🎙️ "Na semana que vem, o Seu Antônio vai à consulta. O carro da prefeitura passa às oito.
 A tecnologia certa não exige que a pessoa mude. Ela vai até a pessoa.
-ALCANCE. O serviço público que chega em você."
+Clara. O serviço público que chega em você."
 🖥️ Logo + nomes da equipe + ODS 3, 10, 11 e 16.
 
 ---

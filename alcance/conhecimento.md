@@ -1,4 +1,4 @@
-# Base de conhecimento do ALCANCE
+# Base de conhecimento da Clara
 Cada bloco tem um código [FONTE]. Ao usar uma informação, cite a fonte em palavras simples ("isso está na Lei Brasileira de Inclusão").
 Os serviços marcados como MUNICÍPIO DEMO são fictícios, criados para a demonstração.
 
@@ -48,6 +48,6 @@ Os serviços marcados como MUNICÍPIO DEMO são fictícios, criados para a demon
 
 ## [MUNICIPIO-DEMO] Serviços da cidade (fictícios, para a demonstração)
 - UBS Jardim Esperança: Rua das Acácias, 300. Atende de segunda a sexta, das 7h às 19h.
-- Transporte da prefeitura para consultas: busca a pessoa em casa 1 hora antes da consulta. Pedido pelo ALCANCE ou na UBS.
+- Transporte da prefeitura para consultas: busca a pessoa em casa 1 hora antes da consulta. Pedido pela Clara ou na UBS.
 - CRAS Jardim Esperança: Rua das Flores, 120. Atende de segunda a sexta, das 8h às 17h.
 - Agentes comunitários: Rosa, Márcio e Cláudia.

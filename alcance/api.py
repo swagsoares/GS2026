@@ -1,4 +1,4 @@
-"""API do ALCANCE. Rodar: .venv\\Scripts\\python -m uvicorn alcance.api:app --reload"""
+"""API da Clara. Rodar: .venv\\Scripts\\python -m uvicorn alcance.api:app --reload"""
 from datetime import date
 
 from fastapi import FastAPI, HTTPException
