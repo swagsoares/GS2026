@@ -10,7 +10,7 @@ O serviço público foi desenhado para quem enxerga, ouve, lê bem e tem interne
 | ☎️ Ligação de voz com IA | Celular simples, sem dados no fim do mês, não lê |
 | 🧑‍⚕️ Agente comunitário | Não tem telefone |
 
-**Comece por aqui:** [Documento do projeto](docs/DOCUMENTO_DO_PROJETO.md) (as 6 perguntas do desafio)
+**Comece por aqui:** [Documento do projeto](docs/DOCUMENTO_DO_PROJETO.md) (as 6 perguntas do desafio) · **Documentação ABNT:** [PDF](docs/entrega/ALCANCE_Documentacao_ABNT.pdf) · [Word](docs/entrega/ALCANCE_Documentacao_ABNT.docx)
 Mais: [Caso de negócio](docs/CASO_DE_NEGOCIO.md) · [Governança da IA](docs/GOVERNANCA.md) · [Roteiro do pitch](docs/ROTEIRO_PITCH.md) · [Dados e fontes](PESQUISA.md) · [Plano de trabalho](PLANO_GS.md)
 
 ## Como rodar

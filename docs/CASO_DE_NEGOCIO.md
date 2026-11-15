@@ -35,7 +35,7 @@ O serviço público se comunica por SMS, sites e aplicativos, e isso exclui quem
 - **3 frentes:** WhatsApp (áudio ou texto) · ligação de voz com IA (funciona em celular simples, sem internet) · agente comunitário, para quem não tem telefone. Existem 285 mil agentes no país.
 - **Perfil de acessibilidade:** voz lenta, linguagem simples, Libras (VLibras), contato da família.
 - **Ação, não só lembrete:** a IA confirma, remarca, **pede o transporte da prefeitura**, avisa a família e **libera a vaga para o próximo da fila**.
-- **Evidência de que conversar funciona melhor que mandar SMS:** num estudo em UBS de Ribeirão Preto, as faltas foram de **9,5% com ligação**, contra **21% com SMS** e **22,8% sem lembrete**. Revisões apontam redução de faltas de **até 40 a 50%** com lembretes, e a ligação com confirmação foi o mais eficaz.
+- **Evidência de que conversar funciona melhor que mandar SMS:** num ensaio randomizado com 306 pacientes no ambulatório do Hospital das Clínicas de Ribeirão Preto, as faltas foram de **9,5% com ligação**, contra **21% com SMS** e **22,8% sem lembrete**. Revisões apontam redução de faltas de **até 40 a 50%** com lembretes, e a ligação com confirmação foi o mais eficaz.
 
 ## 4. Benefícios
 ### Para o cidadão
@@ -149,7 +149,7 @@ O serviço público se comunica por SMS, sites e aplicativos, e isso exclui quem
 - TIC Domicílios 2025: cetic.br
 - Idec + Locomotiva, "Barreiras e limitações no acesso à internet": idec.org.br
 - Absenteísmo no ES, Saúde em Debate (2020): doaj.org/article/1df88051fdb3453696d732a5aaa75677
-- Ligação × SMS em UBS de Ribeirão Preto: hcrp.usp.br/revistaqualidade/uploads/Artigos/239/239.pdf
+- Ligação × SMS no ambulatório do HC de Ribeirão Preto (Lance, Pazin Filho e Neves): hcrp.usp.br/revistaqualidade/uploads/Artigos/239/239.pdf
 - Revisão de escopo sobre lembretes: journals.ipl.pt/stecnologia/article/view/901
 - Preços da Twilio Voice (Brasil): twilio.com/voice/pricing/br
 - Preços do WhatsApp no Brasil: talkall.com.br/en/novidades/tarifas-whatsapp-2026 · messagecentral.com/blog/whatsapp-business-api-pricing-brazil

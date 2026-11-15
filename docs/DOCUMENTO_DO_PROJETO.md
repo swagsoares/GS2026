@@ -85,7 +85,7 @@ Num município de **100 mil habitantes** (estimativa conservadora, detalhada no 
 - retorno de **~R$ 3,10 para cada R$ 1** investido pela prefeitura;
 - custo de **R$ 0,12 por habitante/mês**.
 
-Nos dados reais do SUS, o SMS ajuda pouco: com a mesma espera (15 a 30 dias), ainda faltam **29,8%** de quem recebe SMS. E num estudo numa UBS de Ribeirão Preto, as faltas foram de **9,5% com ligação**, contra **21% com SMS** e **22,8% sem lembrete**. Nossa estimativa usa uma redução de só 30%.
+Nos dados reais do SUS, o SMS ajuda pouco: com a mesma espera (15 a 30 dias), ainda faltam **29,8%** de quem recebe SMS. E num ensaio randomizado com 306 pacientes no ambulatório do Hospital das Clínicas de Ribeirão Preto, as faltas foram de **9,5% com ligação**, contra **21% com SMS** e **22,8% sem lembrete**. Nossa estimativa usa uma redução de só 30%.
 
 **Indicadores do piloto:** taxa de faltas (contra uma UBS de comparação), vagas recuperadas, tempo até remarcar, % de conversas passadas para humano e satisfação por voz.
 
