@@ -33,7 +33,7 @@ E cada pessoa tem um perfil de acessibilidade: voz mais lenta, linguagem simples
 🎙️ (depois da ligação) "Repare: ela não liberou a vaga do Seu Antônio quando ele disse que não conseguia ir. Ela resolveu o problema dele. E se apresentou falando o nome da agente comunitária que ele conhece, porque desconfiar de ligação é sinal de esperteza, não de atraso."
 🖥️ Mostrar o painel da Carla: a linha do Seu Antônio sobe com "Transporte pedido".
 🎙️ "Na mesma hora, a gestora da UBS vê o resultado."
-🖥️ WhatsApp: mandar a foto de uma carta (pode ser uma carta impressa, sem dados reais) e mostrar a resposta em áudio.
+🖥️ No site, em "Como o cidadão vê", escolher a Dona Benedita e clicar em "Ver exemplo": a foto da carta e a resposta em áudio aparecem no celular da tela. (Opcional: se o WhatsApp de verdade for testado até a gravação, trocar por ele.)
 🎙️ "A Dona Benedita lê pouco. Ela fotografa uma carta que não entendeu e recebe a explicação em áudio, em linguagem simples, dizendo o que fazer e onde ir."
 🖥️ Rápido: tela de Visitas da agente Rosa.
 🎙️ "E a agente Rosa sabe quem precisa de uma visita hoje."
@@ -60,7 +60,7 @@ ALCANCE. O serviço público que chega em você."
 - [ ] Clicar em "reiniciar" (ou usar a API `/api/demo/reiniciar/1`) antes de cada tomada
 - [ ] Gravar a ligação 2 ou 3 vezes e escolher a melhor
 - [ ] Cortar o aviso de "conta de teste" da Twilio, ou fazer o upgrade antes
-- [ ] Imprimir uma carta fictícia para a cena do Lê pra Mim (sem dados reais)
+- [ ] Cena da Dona Benedita: ensaiar o "Ver exemplo" no site (o WhatsApp real é opcional)
 - [ ] Gravar a narração em lugar silencioso; celular perto da boca na ligação, sem viva-voz
 - [ ] Conferir o tempo total: ≤ 7:00
 - [ ] Ativar as legendas no vídeo final (acessibilidade também no pitch!)
