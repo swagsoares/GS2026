@@ -1,0 +1,94 @@
+{
+  "registros": 110521,
+  "taxa_falta_real": 0.202,
+  "roc_auc": 0.726,
+  "relatorio": {
+    "0": {
+      "precision": 0.8567574350608609,
+      "recall": 0.7740052148282508,
+      "f1-score": 0.8132817153067302,
+      "support": 17642.0
+    },
+    "1": {
+      "precision": 0.35349440570779955,
+      "recall": 0.48846067667488235,
+      "f1-score": 0.4101599247412982,
+      "support": 4463.0
+    },
+    "accuracy": 0.7163537661162633,
+    "macro avg": {
+      "precision": 0.6051259203843302,
+      "recall": 0.6312329457515666,
+      "f1-score": 0.6117208200240142,
+      "support": 22105.0
+    },
+    "weighted avg": {
+      "precision": 0.7551486180510117,
+      "recall": 0.7163537661162633,
+      "f1-score": 0.73189141667323,
+      "support": 22105.0
+    }
+  },
+  "vies": [
+    {
+      "grupo": "Idade 0-17",
+      "n": 5520,
+      "taxa_falta": 0.214,
+      "roc_auc": 0.723,
+      "alertados": 0.368
+    },
+    {
+      "grupo": "Idade 18-39",
+      "n": 6328,
+      "taxa_falta": 0.228,
+      "roc_auc": 0.729,
+      "alertados": 0.489
+    },
+    {
+      "grupo": "Idade 40-59",
+      "n": 5985,
+      "taxa_falta": 0.195,
+      "roc_auc": 0.71,
+      "alertados": 0.157
+    },
+    {
+      "grupo": "Idade 60+",
+      "n": 4272,
+      "taxa_falta": 0.158,
+      "roc_auc": 0.695,
+      "alertados": 0.024
+    },
+    {
+      "grupo": "Mulheres",
+      "n": 14273,
+      "taxa_falta": 0.201,
+      "roc_auc": 0.724,
+      "alertados": 0.288
+    },
+    {
+      "grupo": "Homens",
+      "n": 7832,
+      "taxa_falta": 0.203,
+      "roc_auc": 0.728,
+      "alertados": 0.262
+    },
+    {
+      "grupo": "Com deficiência",
+      "n": 488,
+      "taxa_falta": 0.186,
+      "roc_auc": 0.76,
+      "alertados": 0.137
+    },
+    {
+      "grupo": "Bolsa Família",
+      "n": 2155,
+      "taxa_falta": 0.232,
+      "roc_auc": 0.744,
+      "alertados": 0.477
+    }
+  ],
+  "efeito_sms": {
+    "com_sms": 0.298,
+    "sem_sms": 0.369
+  }
+}

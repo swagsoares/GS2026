@@ -1,0 +1,63 @@
+/* ALCANCE: tinta #1A1F36 · papel #FBFBF8 · névoa #EEF1F8 · piso tátil #F5C400 · cobalto #2340D9 */
+section {
+  background: #FBFBF8;
+  color: #1A1F36;
+  font-family: 'Atkinson Hyperlegible Next', Verdana, sans-serif;
+  padding: 128px 128px 160px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  counter-increment: page;
+}
+section.escuro { background: #1A1F36; color: #FBFBF8; }
+section.piso { background: #F5C400; color: #1A1F36; }
+section.nevoa { background: #EEF1F8; }
+
+/* faixa de piso tátil no topo de cada slide */
+.faixa { position: absolute; left: 0; top: 0; width: 1920px; height: 20px; }
+
+.marca { font-size: 32px; font-weight: 800; letter-spacing: 1px; }
+.olho { font-size: 30px; font-weight: 700; color: #2340D9; }
+.escuro .olho { color: #F5C400; }
+
+h1.titulo { font-size: 120px; font-weight: 800; line-height: 1.02; letter-spacing: -2px; max-width: 1500px; }
+h2.titulo { font-size: 72px; font-weight: 800; line-height: 1.08; letter-spacing: -1px; max-width: 1560px; }
+h2.enorme { font-size: 92px; font-weight: 800; line-height: 1.08; letter-spacing: -1.5px; max-width: 1600px; }
+h3.bloco { font-size: 40px; font-weight: 800; line-height: 1.15; }
+
+p.corpo { font-size: 34px; line-height: 1.4; color: #4A5170; max-width: 1280px; }
+.escuro p.corpo { color: #C9CFE3; }
+p.texto { font-size: 28px; line-height: 1.4; color: #4A5170; }
+.escuro p.texto { color: #C9CFE3; }
+
+p.num { font-size: 88px; font-weight: 800; line-height: 1; letter-spacing: -1px; }
+p.num-azul { font-size: 88px; font-weight: 800; line-height: 1; letter-spacing: -1px; color: #2340D9; }
+
+.fonte { position: absolute; left: 128px; bottom: 64px; width: 1480px; font-size: 24px; color: #4A5170; }
+.escuro .fonte { color: #9AA3C2; }
+.pagina { position: absolute; right: 128px; bottom: 64px; width: 120px; font-size: 24px; text-align: right; color: #4A5170; }
+.pagina::after { content: counter(page); }
+.escuro .pagina { color: #9AA3C2; }
+
+.linha { display: flex; gap: 56px; align-items: flex-start; }
+.grade3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 56px 64px; }
+.grade4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 32px; }
+.col { display: flex; flex-direction: column; gap: 16px; }
+.cartao { display: flex; flex-direction: column; gap: 14px; border-top: 6px solid #1A1F36; padding-top: 24px; }
+.escuro .cartao { border-top-color: #F5C400; }
+.caixa { display: flex; flex-direction: column; gap: 14px; background: #FFFFFF; border: 2px solid #D6DBE8; border-radius: 20px; padding: 36px; }
+.caixa-escura { display: flex; flex-direction: column; gap: 14px; background: #262C47; border-radius: 20px; padding: 36px; }
+
+.chip { font-size: 28px; font-weight: 700; padding: 12px 24px; border-radius: 999px; background: #1A1F36; color: #FBFBF8; }
+.chip-claro { font-size: 28px; font-weight: 700; padding: 12px 24px; border-radius: 999px; border: 2px solid #1A1F36; }
+.escuro .chip-claro { border-color: #F5C400; color: #F5C400; }
+
+.passo { font-size: 32px; font-weight: 800; width: 64px; height: 64px; border-radius: 32px; background: #F5C400; color: #1A1F36; display: flex; align-items: center; justify-content: center; }
+
+.barra-rotulo { font-size: 30px; font-weight: 700; width: 260px; flex-shrink: 0; }
+.barra-valor { font-size: 30px; font-weight: 800; width: 120px; flex-shrink: 0; }
+
+/* chegada: elementos sobem em sequência */
+@keyframes sobe { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.entra { animation: sobe 600ms ease-out both; animation-delay: calc(var(--i, 0) * 140ms); }

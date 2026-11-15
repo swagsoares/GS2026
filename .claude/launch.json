@@ -1,0 +1,24 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "alcance-api",
+      "runtimeExecutable": ".venv/Scripts/python.exe",
+      "runtimeArgs": ["-m", "uvicorn", "alcance.api:app", "--port", "8000"],
+      "port": 8000
+    },
+    {
+      "name": "alcance-web",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "web", "run", "dev"],
+      "port": 5173
+    },
+    {
+      "name": "alcance-tunel",
+      "runtimeExecutable": ".venv/Scripts/python.exe",
+      "runtimeArgs": ["-u", "-m", "alcance.tunel"],
+      "port": 8000,
+      "url": "http://localhost:8000"
+    }
+  ]
+}

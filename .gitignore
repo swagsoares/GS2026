@@ -1,0 +1,15 @@
+.venv/
+__pycache__/
+.env
+data/*.db
+data/raw/*
+!data/raw/.gitkeep
+data/modelo_faltas.joblib
+.pytest_cache/
+web/node_modules/
+web/dist/
+data/*.wav
+data/*.mp3
+data/audios/
+data/url_publica.txt
+.claude/settings.local.json

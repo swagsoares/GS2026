@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --color-papel: #ffffff;
+  --color-nevoa: #eef1f8;
+  --color-linha: #d6dbe8;
+  --color-tinta: #1a1f36;
+  --color-tinta-suave: #4a5170;
+  --color-piso: #f5c400;
+  --color-cobalto: #2340d9;
+  --color-risco-alto: #c8321f;
+  --color-risco-medio: #8f5600;
+  --color-risco-baixo: #1f7a4d;
+  --font-sans: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, sans-serif;
+}
+
+/* Modo alto contraste (botão no topo) */
+html[data-contraste="alto"] {
+  --color-nevoa: #ffffff;
+  --color-linha: #000000;
+  --color-tinta: #000000;
+  --color-tinta-suave: #000000;
+  --color-cobalto: #0000c8;
+  --color-risco-medio: #6b3f00;
+}
+
+html { font-size: var(--escala, 100%); }
+body { @apply bg-papel text-tinta font-sans antialiased; }
+
+:focus-visible { outline: 3px solid var(--color-cobalto); outline-offset: 2px; border-radius: 4px; }
+
+/* Textura do piso tátil: a assinatura visual do ALCANCE */
+.piso {
+  background-color: var(--color-piso);
+  background-image: radial-gradient(circle, rgb(26 31 54 / 0.16) 2.2px, transparent 2.7px);
+  background-size: 14px 14px;
+}
+
+@keyframes onda { 0%, 100% { transform: scaleY(0.35); } 50% { transform: scaleY(1); } }
+.onda span { animation: onda 0.9s ease-in-out infinite; transform-origin: center; }
+
+@keyframes entra { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.entra { animation: entra 0.3s ease-out both; }
+
+@media (prefers-reduced-motion: reduce) {
+  .onda span, .entra { animation: none; }
+}

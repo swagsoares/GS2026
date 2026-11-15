@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ALCANCE: o serviço público que chega em você, por WhatsApp, ligação ou visita do agente." />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;700;800&display=swap" rel="stylesheet" />
+    <title>ALCANCE</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- VLibras: tradutor oficial de português para Libras (governo federal) -->
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+    <script>try { new window.VLibras.Widget('https://vlibras.gov.br/app') } catch (e) {}</script>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

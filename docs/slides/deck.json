@@ -1,0 +1,18 @@
+{
+  "v": 5,
+  "createdOnFiles": {"v": 1, "at": "2026-11-14T21:00:00Z"},
+  "lists": "css",
+  "format": {"v": 1, "shared": ["project/deck.css"]},
+  "title": "ALCANCE: pitch GS 2026",
+  "order": ["capa", "antonio", "problema", "tese", "frentes", "demo", "tecnologia", "governanca", "impacto", "negocio", "fechamento"],
+  "sections": {
+    "s1": {"description": "A história do Seu Antônio e o problema em números.", "start": "capa"},
+    "s2": {"description": "A solução: a IA que se adapta à pessoa, por três caminhos.", "start": "tese"},
+    "s3": {"description": "Demonstração real, tecnologia e governança.", "start": "demo"},
+    "s4": {"description": "Evidência, impacto, modelo de negócio e fechamento.", "start": "impacto"}
+  },
+  "faces": {
+    "atkinson-hyperlegible-next": {"family": "Atkinson Hyperlegible Next", "href": "https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&display=swap"}
+  },
+  "designSystems": []
+}
