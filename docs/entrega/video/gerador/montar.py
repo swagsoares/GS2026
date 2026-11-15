@@ -1,22 +1,25 @@
-"""Monta o vídeo do pitch: imagens + vozes + legendas. Uso: python montar.py"""
+"""Monta o vídeo do pitch: cenas de cinema (Google Flow) + slides + telas do site + vozes + legendas.
+Cada segmento tem uma lista de visuais; o último ocupa o tempo que sobrar da narração."""
 import json, re, subprocess, wave
 from pathlib import Path
 
 AQUI = Path(__file__).parent
-IMG, AUD, TMP = AQUI / "img", AQUI / "audio_final", AQUI / "clipes"
+IMG, AUD, CINE, TMP = AQUI / "img", AQUI / "audio_final", AQUI / "flow", AQUI / "clipes"
 TMP.mkdir(exist_ok=True)
 cfg = json.loads((AQUI / "cenas.json").read_text(encoding="utf-8"))
 FPS, ANTES, DEPOIS, ENTRE_FALAS = 30, 0.35, 0.55, 0.45
-NOMES = {"ia": "ALCANCE", "antonio": "Seu Antônio", "benedita": "Dona Benedita"}
+NOMES = {"ia": "Clara", "antonio": "Seu Antônio", "benedita": "Dona Benedita"}
+FONTE = "C\\:/Windows/Fonts/arial.ttf"
+AVISO = (f"drawtext=fontfile='{FONTE}':text='Cena ilustrativa gerada com IA · personagens fictícios':"
+         "x=40:y=36:fontsize=26:fontcolor=white@0.85:box=1:boxcolor=black@0.45:boxborderw=10")
 
-# legenda com números, como se lê na tela (a voz fala por extenso)
 NUMEROS = [
     ("trinta e oito vírgula seis por cento", "38,6%"), ("dezoito vírgula seis milhões", "18,6 milhões"),
     ("sete vírgula nove milhões", "7,9 milhões"), ("dois vírgula nove por cento", "2,9%"),
     ("Vinte e nove por cento", "29%"), ("sessenta e nove por cento", "69%"), ("Vinte e oito milhões", "28 milhões"),
     ("duzentos e oitenta e cinco mil", "285 mil"), ("cento e dez mil", "110 mil"), ("dezesseis de dezesseis", "16 de 16"),
-    ("cento e noventa e dois", "192"), ("cento e doze", "112"), ("trezentos e seis", "306"),
-    ("nove e meio por cento", "9,5%"), ("vinte e um por cento", "21%"), ("cem mil", "100 mil"),
+    ("dezessete de dezessete", "17 de 17"), ("cento e noventa e dois", "192"), ("cento e doze", "112"),
+    ("trezentos e seis", "306"), ("nove e meio por cento", "9,5%"), ("vinte e um por cento", "21%"), ("cem mil", "100 mil"),
     ("quatro mil e quinhentas", "4.500"), ("trinta e dois reais", "R$ 32"), ("doze centavos", "R$ 0,12"),
     ("três reais para cada real", "R$ 3 para cada R$ 1"), ("sessenta e oito", "68"), ("trinta dias", "30 dias"),
 ]
@@ -33,30 +36,53 @@ def dur(arq):
 def run(*args):
     r = subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", *map(str, args)], capture_output=True, text=True)
     if r.returncode:
-        raise SystemExit(r.stderr)
+        raise SystemExit(r.stderr[-1500:])
 
-def clipe(nome, imagem, audio, total, inicio, zoom):
-    if "final" in __import__("sys").argv and (TMP / f"{nome}.mp4").exists():
+def parte(visual, d, saida):
+    """Vídeo mudo de d segundos para um visual: cine:N, slide:nome, still:nome ou dlg:arquivo."""
+    tipo, alvo = visual.split(":")
+    if tipo == "cine":
+        run("-i", CINE / f"cine{alvo}.mp4", "-t", f"{d:.3f}", "-vf",
+            f"scale=1920:1080:flags=lanczos,fps={FPS},tpad=stop_mode=clone:stop_duration=10,{AVISO},format=yuv420p",
+            "-an", "-t", f"{d:.3f}", "-c:v", "libx264", "-preset", "medium", "-crf", "18", saida)
         return
-    """Gera um MP4 de 'total' segundos com a imagem e o áudio começando em 'inicio'."""
-    escala = "scale=1920:1080:flags=lanczos"
-    if zoom:  # aproximação lenta (Ken Burns) para a tela não ficar parada
-        n = int(total * FPS)
+    img = IMG / (f"slide_{alvo}.png" if tipo == "slide" else f"still_{alvo}.png" if tipo == "still" else f"{alvo}.png")
+    if tipo == "dlg":
+        filtro = f"scale=1920:1080:flags=lanczos,fps={FPS},format=yuv420p"
+    else:  # aproximação lenta para a tela não ficar parada
+        n = max(int(d * FPS), 1)
         filtro = (f"scale=3840:2160:flags=lanczos,zoompan=z='1+0.04*on/{n}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)'"
-                  f":d={n}:s=1920x1080:fps={FPS}")
+                  f":d={n}:s=1920x1080:fps={FPS},format=yuv420p")
+    run("-loop", "1", "-framerate", FPS, "-i", img, "-vf", filtro, "-t", f"{d:.3f}", "-c:v", "libx264", "-preset", "medium", "-crf", "18", saida)
+
+def clipe(nome, visuais, audio, total, inicio, som_do_clipe=None):
+    """visuais: [(visual, duração ou None)]; o None ocupa o resto."""
+    fixos = sum(d for _, d in visuais if d)
+    partes = []
+    for k, (v, d) in enumerate(visuais):
+        d = d if d else max(total - fixos, 0.5)
+        p = TMP / f"{nome}_p{k}.mp4"
+        parte(v, d, p)
+        partes.append(p)
+    lista = TMP / f"{nome}_lista.txt"
+    lista.write_text("".join(f"file '{p.as_posix()}'\n" for p in partes), encoding="utf-8")
+    video = TMP / f"{nome}_v.mp4"
+    run("-f", "concat", "-safe", "0", "-i", lista, "-c", "copy", video)
+    if som_do_clipe:   # abertura: o som ambiente da própria cena (celular vibrando)
+        entrada = ["-i", som_do_clipe]
+        filtro_a = "[1:a]aresample=48000,volume=0.9,apad[a]"
+    elif audio:
+        entrada = ["-i", audio]
+        filtro_a = f"[1:a]aresample=48000,adelay={int(inicio * 1000)}:all=1,apad[a]"
     else:
-        filtro = f"{escala},fps={FPS}"
-    entrada_audio = (["-i", audio] if audio else ["-f", "lavfi", "-i", "anullsrc=r=48000:cl=mono"])
-    atraso = int(inicio * 1000)
-    run("-loop", "1", "-framerate", FPS, "-i", imagem, *entrada_audio,
-        "-filter_complex", f"[0:v]{filtro},format=yuv420p[v];[1:a]aresample=48000,adelay={atraso}:all=1,apad[a]",
-        "-map", "[v]", "-map", "[a]", "-t", f"{total:.3f}", "-c:v", "libx264", "-preset", "medium", "-crf", "18",
-        "-c:a", "aac", "-b:a", "160k", "-ac", "1", TMP / f"{nome}.mp4")
+        entrada = ["-f", "lavfi", "-i", "anullsrc=r=48000:cl=mono"]
+        filtro_a = "[1:a]apad[a]"
+    run("-i", video, *entrada, "-filter_complex", filtro_a, "-map", "0:v", "-map", "[a]", "-t", f"{total:.3f}",
+        "-c:v", "copy", "-c:a", "aac", "-b:a", "160k", "-ac", "1", TMP / f"{nome}.mp4")
 
 clipes, srt, t = [], [], 0.0
 
 def add_legenda(texto, ini, fim, quem=None):
-    """Quebra em frases de até ~90 caracteres e distribui o tempo pelo tamanho."""
     texto = legenda(texto)
     partes = []
     for frase in re.split(r"(?<=[.?!:])\s+", texto):
@@ -73,46 +99,48 @@ def add_legenda(texto, ini, fim, quem=None):
         srt.append((cur, cur + d, f"{quem}: {p}" if quem else p))
         cur += d
 
-import sys
-SO_FINAL = "final" in sys.argv
+def visuais_de(s):
+    if "visuais" in s:
+        return [(v["v"], v.get("d")) for v in s["visuais"]]
+    return [(s["visual"], None)]
+
 for s in cfg["segmentos"]:
-    tipo, alvo = s["visual"].split(":")
-    if tipo == "dialogo":
+    if s["visual"].startswith("dialogo:"):
+        alvo = s["visual"].split(":")[1]
         for k, (quem, texto) in enumerate(cfg["dialogos"][alvo]):
-            img = IMG / f"d_{alvo}_{k + 1}.png"
+            v = f"dlg:d_{alvo}_{k + 1}"
             if quem:
                 a = AUD / f"d_{alvo}_{k}.wav"; d = dur(a)
                 total = 0.25 + d + ENTRE_FALAS
-                clipe(f"{s['id']}_{k}", img, a, total, 0.25, False)
+                clipe(f"{s['id']}_{k}", [(v, None)], a, total, 0.25)
                 add_legenda(texto, t + 0.25, t + 0.25 + d, NOMES[quem])
             else:
                 total = 2.2
-                clipe(f"{s['id']}_{k}", img, None, total, 0, False)
+                clipe(f"{s['id']}_{k}", [(v, None)], None, total, 0)
             clipes.append(TMP / f"{s['id']}_{k}.mp4"); t += total
         continue
-    img = IMG / (f"slide_{alvo}.png" if tipo == "slide" else f"still_{alvo}.png")
+    vis = visuais_de(s)
     if s.get("texto"):
         a = AUD / f"{s['id']}.wav"; d = dur(a)
-        total = ANTES + d + DEPOIS + s.get("cauda", 0)
-        clipe(s["id"], img, a, total, ANTES, True)
+        total = max(ANTES + d + DEPOIS + s.get("cauda", 0), sum(x for _, x in vis if x) + 0.5)
+        clipe(s["id"], vis, a, total, ANTES)
         add_legenda(s["texto"], t + ANTES, t + ANTES + d)
     else:
         total = s.get("silencio", 2)
-        clipe(s["id"], img, None, total, 0, True)
+        som = CINE / f"cine{vis[0][0].split(':')[1]}.mp4" if s.get("som_do_clipe") else None
+        clipe(s["id"], vis, None, total, 0, som)
     clipes.append(TMP / f"{s['id']}.mp4"); t += total
     print(f"{s['id']} ok, {t:.1f}s", flush=True)
 
 lista = TMP / "lista.txt"
 lista.write_text("".join(f"file '{c.as_posix()}'\n" for c in clipes), encoding="utf-8")
-if not SO_FINAL:
-    run("-f", "concat", "-safe", "0", "-i", lista, "-c", "copy", AQUI / "bruto.mp4")
+run("-f", "concat", "-safe", "0", "-i", lista, "-c", "copy", AQUI / "bruto.mp4")
 
 def ts(x):
     h, r = divmod(x, 3600); m, sec = divmod(r, 60)
     return f"{int(h):02d}:{int(m):02d}:{int(sec):02d},{int((sec % 1) * 1000):03d}"
 (AQUI / "legendas.srt").write_text("".join(f"{i}\n{ts(a)} --> {ts(b)}\n{txt}\n\n" for i, (a, b, txt) in enumerate(srt, 1)), encoding="utf-8")
 
-# legendas em ASS com resolução 1920x1080 declarada (tamanho e margens em pixels de verdade)
 def ass_ts(x):
     h, r = divmod(x, 3600); m, sec = divmod(r, 60)
     return f"{int(h)}:{int(m):02d}:{sec:05.2f}"
@@ -134,5 +162,5 @@ linhas = "".join(f"Dialogue: 0,{ass_ts(a)},{ass_ts(b)},Padrao,,0,0,0,,{txt}\n" f
 sub = (AQUI / "legendas.ass").as_posix().replace(":", "\\:")
 run("-i", AQUI / "bruto.mp4", "-vf", f"fade=t=in:st=0:d=0.8,fade=t=out:st={t - 1.2:.2f}:d=1.2,ass='{sub}'",
     "-af", f"loudnorm=I=-16:TP=-1.5:LRA=11,afade=t=out:st={t - 1.2:.2f}:d=1.2",
-    "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-c:a", "aac", "-b:a", "160k", AQUI / "ALCANCE_pitch.mp4")
+    "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-c:a", "aac", "-b:a", "160k", AQUI / "Clara_pitch.mp4")
 print(f"pronto: {t:.1f}s ({int(t // 60)}min{int(t % 60):02d}s), {len(srt)} legendas")

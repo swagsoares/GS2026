@@ -36,6 +36,8 @@ async function main() {
   await cdp('Page.enable');
   await cdp('Emulation.setDeviceMetricsOverride', { width: 1200, height: 675, deviceScaleFactor: 1.6, mobile: false });
   // tamanho de texto maior para ficar legível no vídeo
+  await ir('/', 3500);
+  await foto('still_inicio');
   await ir('/demonstracao');
   await foto('still_demo_inicio');
 
@@ -66,7 +68,7 @@ async function main() {
 
   // o painel é capturado por último, depois que o transporte do Seu Antônio é registrado (ver montar.sh)
   if (process.argv[2] === 'painel') {
-    await ir('/', 4500);
+    await ir('/painel', 4500);
     await js(`(() => { const h = document.getElementById('fila'); window.scrollTo(0, h.getBoundingClientRect().top + scrollY - 24); })()`);
     await esperar(800);
     await foto('still_painel');

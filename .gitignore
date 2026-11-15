@@ -14,3 +14,4 @@ data/audios/
 data/url_publica.txt
 .claude/settings.local.json
 docs/entrega/video/*.mp4
+docs/entrega/video/cenas_flow/
