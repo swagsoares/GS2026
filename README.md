@@ -10,6 +10,8 @@ O serviço público foi desenhado para quem enxerga, ouve, lê bem e tem interne
 | ☎️ Ligação de voz com IA | Celular simples, sem dados no fim do mês, não lê |
 | 🧑‍⚕️ Agente comunitário | Não tem telefone |
 
+A **Clara** é a persona: assistente virtual do posto, com nome e rosto, que sempre diz que é virtual. Com a **rede de apoio**, quando a pessoa já faltou mesmo confirmando, ela avisa também um familiar, só com autorização do idoso, e cada tentativa de contato fica registrada.
+
 **Comece por aqui:** [Documento do projeto](docs/DOCUMENTO_DO_PROJETO.md) (as 6 perguntas do desafio) · **Documentação ABNT:** [PDF](docs/entrega/Clara_Documentacao_ABNT.pdf) · [Word](docs/entrega/Clara_Documentacao_ABNT.docx)
 Mais: [Persona Clara](docs/PERSONA_CLARA.md) · [Caso de negócio](docs/CASO_DE_NEGOCIO.md) · [Governança da IA](docs/GOVERNANCA.md) · [Roteiro do pitch](docs/ROTEIRO_PITCH.md) · [Dados e fontes](PESQUISA.md) · [Plano de trabalho](PLANO_GS.md)
 
@@ -62,6 +64,10 @@ docs/      documento do projeto, negócio, governança, roteiro e slides
 tests/     testes automatizados
 data/      banco SQLite e dataset (fora do git)
 ```
+
+## Limitações (assumidas)
+- Ainda não houve teste com usuários reais: os testes foram feitos pela equipe, com ligações reais para o celular de um integrante. A validação com idosos e pessoas com deficiência é a primeira etapa do piloto.
+- Cidadãos e serviços do município são fictícios; o modelo de faltas usa dados públicos de 2016 (Vitória/ES).
 
 ## Privacidade
 Os cidadãos do protótipo são **100% fictícios**. As chaves de API ficam no `.env` (fora do git). Veja o `.env.example`.

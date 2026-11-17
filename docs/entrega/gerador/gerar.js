@@ -155,6 +155,10 @@ T.push(h2('3.5 A persona Clara'));
 T.push(p('A solução se apresenta ao cidadão como uma persona: a Clara, assistente virtual do posto de saúde. A escolha segue o caminho de serviços digitais que conquistaram a confiança do público brasileiro ao dar nome e rosto à tecnologia, como a Lu, do Magalu, e a BIA, do Bradesco. Para um idoso que recebe uma ligação, uma voz que diz "aqui é a Clara, do seu posto, a Rosa pediu para eu ligar" é algo que ele consegue reconhecer, lembrar e confirmar presencialmente, o que também reduz o risco de a ligação ser confundida com golpe.'));
 T.push(p('O nome vem de "falar claro", a linguagem simples exigida pela Lei nº 15.263/2025. Antes da escolha, foram pesquisados nomes já usados por assistentes do setor público (Cida, em Arapiraca; Lívia, no e-saúdeSP; Iara, em Fortaleza) para evitar repetição. A Clara é uma personagem ilustrada, e não a imagem de uma pessoa real: quando perguntada, ela diz que é uma assistente virtual, comportamento verificado na avaliação automática, em linha com a transparência exigida pelo PL 2338/2023.'));
 
+T.push(h2('3.6 Rede de apoio'));
+T.push(p('Confirmar a consulta não garante a presença. É comum que pessoas idosas digam que vão para não dar trabalho e acabem não indo. Por isso, quando a pessoa já faltou antes mesmo tendo confirmado, a Clara também avisa um familiar ou vizinho cadastrado como contato de apoio, com dia, hora e o que foi combinado, e volta a ligar na véspera.'));
+T.push(p('O idoso é adulto e decide: a família só é avisada com autorização registrada no cadastro ou dada durante a conversa, e o código bloqueia o aviso quando ela não existe, em respeito à LGPD (BRASIL, 2018). Cada tentativa de contato fica registrada na trilha de auditoria, de modo que, se a pessoa faltar, a unidade consegue demonstrar que tentou. O painel mostra o número de tentativas, quem teve a família avisada e quem já faltou tendo confirmado.'));
+
 T.push(h1('4 ARQUITETURA E TECNOLOGIAS'));
 T.push(h2('4.1 Visão geral e integração dos módulos'));
 T.push(p('O protótipo é composto por um back-end em Python (FastAPI e SQLite) e um site em React. Os módulos se integram em um ciclo fechado:'));
@@ -216,6 +220,7 @@ T.push(...quadro('Incidentes encontrados e correções',
     ['Análise sugeria que o SMS aumenta faltas', 'Revisão da análise', 'Controle do fator de confusão (tempo de espera)']],
   'elaborado pelos autores (2026).', [3.2, 1.8, 3.4]));
 T.push(h2('5.6 Limitações'));
+T.push(p('A principal limitação é que a solução ainda não foi testada com usuários reais: os testes foram feitos pela equipe, incluindo ligações reais da IA para o celular de um integrante, e todos os cidadãos do protótipo são fictícios. A validação com pessoas idosas e com deficiência é a primeira etapa do piloto proposto.'));
 T.push(p('A transcrição de voz pode errar com sotaques fortes ou ruído na linha, situação em que a IA pede para a pessoa repetir. Os serviços municipais da base de conhecimento são fictícios. Os custos de IA de voz vêm de tabelas de terceiros e precisam ser confirmados. A avaliação cobre 17 casos e deve ser ampliada, no piloto, com conversas reais revisadas por amostragem. O modelo de risco foi treinado com dados de 2016 de um único município e deve ser retreinado com dados locais.'));
 
 T.push(h1('6 BUSINESS ANALYTICS'));
@@ -280,13 +285,14 @@ T.push(item('a) ligação telefônica real com IA para um celular, com a convers
 T.push(item('b) assistente de WhatsApp com entendimento de áudio, texto e foto de carta e resposta em áudio, conforme o perfil;'));
 T.push(item('c) painel da UBS atualizado ao vivo a cada ação da IA e lista de visitas da agente comunitária;'));
 T.push(item('d) página de governança com o resultado da avaliação (17/17), a ficha e o viés do modelo, os incidentes corrigidos e a trilha de auditoria;'));
-T.push(item('e) treze testes automatizados cobrindo escolha de canal, banco de dados, segurança do webhook, trava de ação irreversível, mascaramento de dados, viés, prioridade por acessibilidade e bloqueio de ação sem o "sim" da pessoa.'));
+T.push(item('e) rede de apoio: aviso à família somente com autorização do idoso, bloqueado em código quando ela não existe, e registro de cada tentativa de contato;'));
+T.push(item('f) catorze testes automatizados cobrindo escolha de canal, banco de dados, segurança do webhook, trava de ação irreversível, mascaramento de dados, viés, prioridade por acessibilidade e bloqueio de ação sem o "sim" da pessoa e consentimento para avisar a família.'));
 T.push(p('A solução contribui para os Objetivos de Desenvolvimento Sustentável 3 (saúde e bem-estar), 10 (redução das desigualdades), 11 (cidades sustentáveis) e 16 (instituições eficazes). O código-fonte está disponível em https://github.com/swagsoares/GS2026.'));
 
 T.push(h1('9 CONCLUSÃO'));
 T.push(p('Este trabalho partiu da vida real de quem o serviço público digital deixa de fora e chegou a uma solução que inverte a lógica de atendimento: em vez de exigir que o cidadão se adapte à tecnologia, a tecnologia se adapta ao cidadão e vai até ele. A Clara combina, de forma inédita no contexto brasileiro, atendimento proativo, funcionamento sem internet, adaptação à deficiência de cada pessoa e um agente humano como terceira frente, integrados ao fluxo do SUS.'));
 T.push(p('Do ponto de vista de governança, o projeto mostrou que IA responsável depende de evidência verificável, e não apenas de intenção: a avaliação automática, a revisão humana e a medição de viés encontraram erros reais, que foram corrigidos e documentados. Do ponto de vista analítico, os dados reais do SUS confirmaram a tese central: o SMS sozinho não resolve, e conversar funciona.'));
-T.push(p('Como trabalhos futuros, destacam-se o teste com usuários reais com deficiência, o piloto em uma UBS com medição contra unidade de comparação, o retreino do modelo com dados locais e a integração com o SISREG e o e-SUS.'));
+T.push(p('Como trabalhos futuros, destacam-se, em primeiro lugar, a validação com usuários reais (pessoas idosas, com deficiência visual ou auditiva e com baixo letramento, além de agentes comunitários e gestoras de UBS), o piloto em uma UBS com medição contra unidade de comparação, o retreino do modelo com dados locais e a integração com o SISREG e o e-SUS.'));
 T.push(p('Na semana seguinte, o Seu Antônio vai à consulta. O carro da prefeitura passa às oito.'));
 
 // ---------- PÓS-TEXTUAIS ----------
