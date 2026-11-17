@@ -28,6 +28,7 @@
 | Dados sensíveis (saúde e deficiência) | Usados só para adaptar a comunicação. Acesso restrito à equipe da UBS |
 | Transparência | A IA se apresenta como assistente virtual e diz quem pediu a ligação (a agente comunitária) |
 | Direitos do titular | A pessoa pode pedir para não ser mais contatada pela IA e ser atendida só por humanos |
+| Rede de apoio (família) | O idoso é adulto e decide. A família só é avisada com autorização registrada no cadastro ou dada na hora; sem isso, o código bloqueia o aviso (`test_rede_de_apoio_exige_consentimento`). Cada tentativa de contato fica na trilha de auditoria |
 | Protótipo | **100% fictício**: nenhum dado pessoal real. O modelo usa uma base pública e anônima do SUS (Kaggle) |
 | Segurança | Chaves fora do código (`.env`), webhook com assinatura da Twilio validada, só o número verificado recebe ligações na demo |
 | Próximo passo (piloto) | Relatório de Impacto à Proteção de Dados, encarregado de dados nomeado, contrato de operador com os fornecedores |

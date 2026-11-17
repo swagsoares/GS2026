@@ -57,6 +57,8 @@ Cada cidadão tem um **perfil de acessibilidade** (voz mais lenta, linguagem sim
 
 **O que a IA faz na conversa:** confirma a consulta, remarca, pede o transporte da prefeitura, avisa um familiar, agenda lembrete, explica uma carta e tira dúvidas de direitos citando a fonte. **Cada ação atualiza o painel da UBS na hora**, e a vaga só é liberada quando a pessoa diz claramente que não quer ir.
 
+**Rede de apoio.** Muita gente diz que vai e acaba não indo (é comum com idosos, que confirmam para não dar trabalho). Quando a pessoa já faltou antes mesmo tendo confirmado, a Clara também avisa um familiar ou vizinho, **só com a autorização do idoso**, registrada no cadastro ou dada na hora (o código bloqueia o aviso sem ela, por causa da LGPD). Cada tentativa de contato fica registrada: se a pessoa faltar, a UBS consegue mostrar que tentou. O painel mostra "Família avisada", o número de tentativas e quem "já faltou tendo confirmado".
+
 **A persona.** A solução se apresenta como a **Clara**, assistente virtual do posto de saúde, com nome e rosto, como a Lu, do Magalu, ou a BIA, do Bradesco. Para um idoso, "aqui é a Clara, do seu posto, a Rosa pediu pra eu ligar" é algo que ele reconhece e pode confirmar no posto, o que também protege contra golpes. O nome vem de "falar claro" (Lei da Linguagem Simples). Ela é uma ilustração, não uma pessoa real, e diz que é assistente virtual quando perguntam. Detalhes em [PERSONA_CLARA.md](PERSONA_CLARA.md).
 
 ### 2.4 Quem participa do ecossistema?

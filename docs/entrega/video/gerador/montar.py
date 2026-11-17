@@ -5,6 +5,7 @@ from pathlib import Path
 
 AQUI = Path(__file__).parent
 IMG, AUD, CINE, TMP = AQUI / "img", AQUI / "audio_final", AQUI / "flow", AQUI / "clipes"
+TELAS = AQUI / "telas"
 TMP.mkdir(exist_ok=True)
 cfg = json.loads((AQUI / "cenas.json").read_text(encoding="utf-8"))
 FPS, ANTES, DEPOIS, ENTRE_FALAS = 30, 0.35, 0.55, 0.45
@@ -21,7 +22,7 @@ NUMEROS = [
     ("dezessete de dezessete", "17 de 17"), ("cento e noventa e dois", "192"), ("cento e doze", "112"),
     ("trezentos e seis", "306"), ("nove e meio por cento", "9,5%"), ("vinte e um por cento", "21%"), ("cem mil", "100 mil"),
     ("quatro mil e quinhentas", "4.500"), ("trinta e dois reais", "R$ 32"), ("doze centavos", "R$ 0,12"),
-    ("três reais para cada real", "R$ 3 para cada R$ 1"), ("sessenta e oito", "68"), ("trinta dias", "30 dias"),
+    ("três reais para cada real", "R$ 3 para cada R$ 1"), ("a Lú, do Magalú, e a Bia, do Bradesco", "a Lu, do Magalu, e a BIA, do Bradesco"), ("a personagem Lu, do Magalu, e a Bia, do Bradesco", "a personagem Lu, do Magalu, e a BIA, do Bradesco"), ("sessenta e oito", "68"), ("trinta dias", "30 dias"),
 ]
 
 def legenda(t):
@@ -38,11 +39,25 @@ def run(*args):
     if r.returncode:
         raise SystemExit(r.stderr[-1500:])
 
-def parte(visual, d, saida):
-    """Vídeo mudo de d segundos para um visual: cine:N, slide:nome, still:nome ou dlg:arquivo."""
+def parte(visual, d, saida, ini=0.0):
+    """Vídeo mudo de d segundos: cine:N, tela:nome (gravação da interface), slide:nome, still:nome ou dlg:arquivo."""
     tipo, alvo = visual.split(":")
+    if tipo == "tela":
+        quadros = len(list((TELAS / alvo).glob("*.jpg")))
+        if quadros <= 3:  # tela parada: vira imagem com aproximação lenta (o screencast só manda quadro quando muda)
+            png = TMP / f"tela_{alvo}.png"
+            run("-i", TELAS / f"{alvo}.mp4", "-frames:v", "1", png)
+            n = max(int(d * FPS), 1)
+            z = "1" if alvo.startswith(("antonio_", "benedita_")) else f"1+0.035*on/{n}"  # no diálogo a câmera fica parada
+            run("-loop", "1", "-framerate", FPS, "-i", png, "-vf",
+                f"scale=3840:2160:flags=lanczos,zoompan=z='{z}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d={n}:s=1920x1080:fps={FPS},format=yuv420p",
+                "-t", f"{d:.3f}", "-c:v", "libx264", "-preset", "medium", "-crf", "18", saida)
+            return
+        run("-i", TELAS / f"{alvo}.mp4", "-vf", f"fps={FPS},tpad=stop_mode=clone:stop_duration=30,format=yuv420p",
+            "-an", "-t", f"{d:.3f}", "-c:v", "libx264", "-preset", "medium", "-crf", "18", saida)
+        return
     if tipo == "cine":
-        run("-i", CINE / f"cine{alvo}.mp4", "-t", f"{d:.3f}", "-vf",
+        run("-ss", f"{ini:.2f}", "-i", CINE / f"cine{alvo}.mp4", "-t", f"{d:.3f}", "-vf",
             f"scale=1920:1080:flags=lanczos,fps={FPS},tpad=stop_mode=clone:stop_duration=10,{AVISO},format=yuv420p",
             "-an", "-t", f"{d:.3f}", "-c:v", "libx264", "-preset", "medium", "-crf", "18", saida)
         return
@@ -55,14 +70,14 @@ def parte(visual, d, saida):
                   f":d={n}:s=1920x1080:fps={FPS},format=yuv420p")
     run("-loop", "1", "-framerate", FPS, "-i", img, "-vf", filtro, "-t", f"{d:.3f}", "-c:v", "libx264", "-preset", "medium", "-crf", "18", saida)
 
-def clipe(nome, visuais, audio, total, inicio, som_do_clipe=None):
+def clipe(nome, visuais, audio, total, inicio, som_do_clipe=None, ini=0.0):
     """visuais: [(visual, duração ou None)]; o None ocupa o resto."""
     fixos = sum(d for _, d in visuais if d)
     partes = []
     for k, (v, d) in enumerate(visuais):
         d = d if d else max(total - fixos, 0.5)
         p = TMP / f"{nome}_p{k}.mp4"
-        parte(v, d, p)
+        parte(v, d, p, ini if k == 0 else 0.0)
         partes.append(p)
     lista = TMP / f"{nome}_lista.txt"
     lista.write_text("".join(f"file '{p.as_posix()}'\n" for p in partes), encoding="utf-8")
@@ -108,7 +123,7 @@ for s in cfg["segmentos"]:
     if s["visual"].startswith("dialogo:"):
         alvo = s["visual"].split(":")[1]
         for k, (quem, texto) in enumerate(cfg["dialogos"][alvo]):
-            v = f"dlg:d_{alvo}_{k + 1}"
+            v = f"tela:{alvo}_{k + 1}" if cfg.get("telas_dialogo") else f"dlg:d_{alvo}_{k + 1}"
             if quem:
                 a = AUD / f"d_{alvo}_{k}.wav"; d = dur(a)
                 total = 0.25 + d + ENTRE_FALAS
@@ -128,7 +143,7 @@ for s in cfg["segmentos"]:
     else:
         total = s.get("silencio", 2)
         som = CINE / f"cine{vis[0][0].split(':')[1]}.mp4" if s.get("som_do_clipe") else None
-        clipe(s["id"], vis, None, total, 0, som)
+        clipe(s["id"], vis, None, total, 0, som, s.get("corte_inicio", 0.0))
     clipes.append(TMP / f"{s['id']}.mp4"); t += total
     print(f"{s['id']} ok, {t:.1f}s", flush=True)
 

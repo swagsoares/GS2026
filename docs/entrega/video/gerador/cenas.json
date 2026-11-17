@@ -15,8 +15,9 @@
     {
       "id": "s00",
       "visual": "cine:1",
-      "silencio": 7.9,
-      "som_do_clipe": true
+      "silencio": 5.2,
+      "som_do_clipe": false,
+      "corte_inicio": 2.6
     },
     {
       "id": "s01",
@@ -29,7 +30,7 @@
         },
         {
           "v": "cine:3",
-          "d": 4.5
+          "d": 5.8
         },
         {
           "v": "slide:antonio"
@@ -49,7 +50,12 @@
     {
       "id": "s03b",
       "visual": "still:inicio",
-      "texto": "A Clara é uma persona, como a Lu ou a BIA: tem nome e rosto para que as pessoas confiem e lembrem dela. Mas ela nunca finge ser gente. Se perguntarem, diz que é uma assistente virtual."
+      "texto": "A Clara é uma persona, assim como a personagem Lu, do Magalu, e a Bia, do Bradesco: tem nome e rosto para que as pessoas confiem e lembrem dela. Mas ela nunca finge ser gente. Se perguntarem, diz que é uma assistente virtual.",
+      "visuais": [
+        {
+          "v": "tela:inicio"
+        }
+      ]
     },
     {
       "id": "s04",
@@ -66,7 +72,7 @@
           "d": 7.9
         },
         {
-          "v": "still:demo_inicio"
+          "v": "tela:demo_inicio"
         }
       ]
     },
@@ -77,17 +83,42 @@
     {
       "id": "s07",
       "visual": "still:antonio_fim",
-      "texto": "Repare: quando ele disse que não tinha como ir, a IA não liberou a vaga. Ela resolveu o problema dele. E se apresentou em nome do posto que ele conhece, porque desconfiar de ligação é sinal de esperteza, não de atraso."
+      "texto": "Repare: quando ele disse que não tinha como ir, a Clara não liberou a vaga. Ela resolveu o problema dele. E se apresentou em nome do posto que ele conhece, porque desconfiar de ligação é sinal de esperteza, não de atraso.",
+      "visuais": [
+        {
+          "v": "tela:antonio_7"
+        }
+      ]
     },
     {
       "id": "s08",
       "visual": "still:painel",
-      "texto": "Na mesma hora, a gestora da UBS vê o resultado no painel: a consulta do Seu Antônio aparece no topo, com o transporte pedido."
+      "texto": "E no painel da gestora, tudo acontece ao vivo: aparece o que a Clara acabou de fazer, e a consulta do Seu Antônio sobe para o topo da fila, com o transporte pedido.",
+      "visuais": [
+        {
+          "v": "tela:painel_ao_vivo"
+        }
+      ]
+    },
+    {
+      "id": "s08b",
+      "visual": "tela:painel_apoio",
+      "visuais": [
+        {
+          "v": "tela:painel_apoio"
+        }
+      ],
+      "texto": "E como muita gente diz que vai e acaba não indo, a Clara também avisa a família, sempre com a permissão do idoso. Cada tentativa fica registrada: a UBS consegue mostrar que tentou."
     },
     {
       "id": "s09",
       "visual": "still:benedita_inicio",
-      "texto": "A Dona Benedita lê pouco. Ela fotografa uma carta que não entendeu e manda um áudio."
+      "texto": "A Dona Benedita lê pouco. Ela fotografa uma carta que não entendeu e manda um áudio.",
+      "visuais": [
+        {
+          "v": "tela:benedita_1"
+        }
+      ]
     },
     {
       "id": "s10",
@@ -103,7 +134,7 @@
           "d": 7.9
         },
         {
-          "v": "still:visitas"
+          "v": "tela:visitas"
         }
       ]
     },
@@ -120,7 +151,12 @@
     {
       "id": "s14",
       "visual": "still:governanca",
-      "texto": "Medimos também o viés do modelo: ele quase não colocava idosos na fila de contato, porque na média eles faltam menos. Corrigimos: quem tem barreira de acesso sempre recebe contato. E ações que não têm volta ficam travadas no código até a pessoa confirmar."
+      "texto": "Medimos também o viés do modelo: ele quase não colocava idosos na fila de contato, porque na média eles faltam menos. Corrigimos: quem tem barreira de acesso sempre recebe contato. E ações que não têm volta ficam travadas no código até a pessoa confirmar.",
+      "visuais": [
+        {
+          "v": "tela:governanca"
+        }
+      ]
     },
     {
       "id": "s15",
@@ -130,7 +166,12 @@
     {
       "id": "s16",
       "visual": "slide:negocio",
-      "texto": "Para a prefeitura, isso custa doze centavos por habitante por mês, com retorno estimado de três reais para cada real investido. E é o momento certo: a lei de linguagem simples, de 2025, obriga todo órgão público a falar de um jeito que todos entendam. E a prefeitura pode contratar um piloto pelo Marco Legal das Startups."
+      "texto": "Para a prefeitura, isso custa doze centavos por habitante por mês, com retorno estimado de três reais para cada real investido. E é o momento certo: a lei de linguagem simples, de 2025, obriga todo órgão público a falar de um jeito que todos entendam. E a prefeitura pode contratar um piloto pelo Marco Legal das Startups.",
+      "visuais": [
+        {
+          "v": "tela:negocio"
+        }
+      ]
     },
     {
       "id": "s17",
@@ -205,5 +246,6 @@
         "Marquei para terça, às nove. Eu mando um áudio na segunda para lembrar."
       ]
     ]
-  }
+  },
+  "telas_dialogo": true
 }
