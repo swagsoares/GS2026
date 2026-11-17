@@ -20,6 +20,16 @@
       "corte_inicio": 2.6
     },
     {
+      "id": "s00v",
+      "visual": "still:inicio",
+      "visuais": [
+        {
+          "v": "still:inicio"
+        }
+      ],
+      "texto": "Esta é a Clara. Não é mais um lembrete por SMS: ela liga para quem não consegue ler, resolve na hora e avisa a família."
+    },
+    {
       "id": "s01",
       "visual": "slide:antonio",
       "texto": "O Seu Antônio tem sessenta e oito anos e quase não enxerga por causa do diabetes. Ele esperou três meses por uma consulta de vista. O posto mandou um SMS para confirmar. Ele não conseguiu ler. Faltou. E agora a regra diz que ele espera mais trinta dias para tentar de novo. O Seu Antônio não perdeu a consulta por descuido. Perdeu porque o serviço público fala uma língua que ele não consegue ouvir.",
