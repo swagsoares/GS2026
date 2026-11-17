@@ -18,6 +18,7 @@ const COMPROMISSOS = [
   ['Humano no controle', 'A IA oferece falar com a equipe em toda conversa. Ações irreversíveis, como liberar uma vaga, são travadas no código até a pessoa confirmar.'],
   ['Sem conselho médico', 'A IA não diagnostica nem indica remédio. Em emergência, orienta procurar o SAMU 192 ou a UPA.'],
   ['Respostas com fonte', 'Dúvidas sobre direitos são respondidas só com a base de conhecimento, citando a lei. Fora dela, a IA diz que não tem certeza.'],
+  ['Rede de apoio', 'Muita gente diz que vai e não vai. Quando a pessoa já faltou antes, a Clara avisa também um familiar, mas só com autorização do idoso (o código bloqueia sem ela). Cada tentativa de contato fica registrada: a UBS consegue mostrar que tentou.'],
   ['LGPD', 'Base legal de execução de política pública (art. 7º, III e art. 11, II, b). Coleta mínima, nunca pede CPF, senha ou dados bancários. O protótipo usa apenas pessoas fictícias.'],
   ['Linguagem simples e acessível', 'Segue a Lei 15.263/2025 e a Lei Brasileira de Inclusão: voz, texto curto, Libras (VLibras) e ritmo mais lento quando a pessoa precisa.'],
   ['Risco do sistema', 'Pelo PL 2338/2023, a Clara prioriza contatos, mas não decide quem é atendido. O modelo só ordena a fila de ligações. Gestão de riscos segue as funções do NIST AI RMF: governar, mapear, medir e gerenciar.'],

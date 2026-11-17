@@ -170,3 +170,19 @@ def test_nao_age_sem_o_sim(tmp_path, monkeypatch):
     texto, acoes = assistente.responder(c, [], [types.Part(text="Não vou conseguir ir, não tenho como ir.")])
     assert acoes == [] and "?" in texto
     assert assistente.disse_sim("Quero, sim.") and not assistente.disse_sim("não tenho como ir")
+
+
+def test_rede_de_apoio_exige_consentimento(tmp_path, monkeypatch):
+    """A família só é avisada com autorização cadastrada ou com o "sim" da pessoa na hora (LGPD)."""
+    from alcance import ia
+    path = tmp_path / "t.db"
+    db.criar_banco(path, n=30)
+    db.garantir_schema(path)
+    monkeypatch.setattr(ia, "conectar", lambda: db.conectar(path))
+    con = db.conectar(path)
+    cid, cons = con.execute("""SELECT c.id, co.id FROM cidadaos c JOIN consultas co ON co.cidadao_id = c.id
+                               WHERE c.contato_familia IS NOT NULL AND c.id <> 1 LIMIT 1""").fetchone()
+    con.execute("UPDATE cidadaos SET autoriza_apoio = 0 WHERE id = ?", (cid,)); con.commit()
+    assert ia.executar_acao(cons, cid, "whatsapp", "avisar_contato_apoio", {})["ok"] is False
+    assert ia.executar_acao(cons, cid, "whatsapp", "avisar_contato_apoio", {"autorizacao_da_pessoa": "pode avisar sim"})["ok"] is True
+    assert db.conectar(path).execute("SELECT autoriza_apoio FROM cidadaos WHERE id=?", (cid,)).fetchone()[0] == 1

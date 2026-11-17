@@ -31,9 +31,27 @@ CREATE TABLE IF NOT EXISTS falas (
 """
 
 
+# rede de apoio: o idoso autoriza (ou não) avisar o familiar; faltas anteriores mostram quem diz "vou" e não vai
+COLUNAS_NOVAS = {"autoriza_apoio": "INT DEFAULT 0", "faltas_anteriores": "INT DEFAULT 0"}
+
+
 def garantir_schema(path=None) -> None:
     con = conectar(path) if path else conectar()
     con.executescript(SCHEMA)
+    existentes = {r[1] for r in con.execute("PRAGMA table_info(cidadaos)")}
+    novas = [c for c in COLUNAS_NOVAS if c not in existentes]
+    for col in novas:
+        con.execute(f"ALTER TABLE cidadaos ADD COLUMN {col} {COLUNAS_NOVAS[col]}")
+    if not novas:  # já migrado: não mexe em consentimento que a pessoa deu ou retirou
+        con.close()
+        return
+    # dados fictícios: quem tem contato de apoio autorizou em ~70% dos casos; idosos faltam um pouco mais no histórico
+    con.execute("""UPDATE cidadaos SET
+        autoriza_apoio = CASE WHEN contato_familia IS NOT NULL AND (id * 7) % 10 < 7 THEN 1 ELSE 0 END,
+        faltas_anteriores = (id * 13) % 4 * (idade >= 60) + (id * 5) % 2
+""")
+    con.execute("UPDATE cidadaos SET autoriza_apoio = 1, faltas_anteriores = 2 WHERE id = 1")  # Seu Antônio
+    con.commit()
     con.close()
 
 NOMES_M = ["Antônio", "José", "Francisco", "João", "Raimundo", "Sebastião", "Pedro", "Luiz", "Carlos", "Manoel"]

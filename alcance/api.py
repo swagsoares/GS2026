@@ -39,6 +39,8 @@ def _consultas(where: str = "", params: tuple = ()) -> list[dict]:
         f"""SELECT co.id AS consulta_id, co.especialidade, co.data_consulta, co.data_marcacao,
                    co.sms_enviado, co.risco_falta, co.status,
                    (SELECT resultado FROM contatos ct WHERE ct.consulta_id = co.id ORDER BY ct.id DESC LIMIT 1) AS ultima_acao,
+                   (SELECT count(*) FROM contatos ct WHERE ct.consulta_id = co.id) AS tentativas,
+                   (SELECT count(*) FROM contatos ct WHERE ct.consulta_id = co.id AND ct.resultado LIKE 'avisar_contato_apoio%') > 0 AS apoio_avisado,
                    c.*
             FROM consultas co JOIN cidadaos c ON c.id = co.cidadao_id {where}""", params)]
     con.close()
@@ -88,6 +90,18 @@ def reiniciar(cid: int):
     con.execute("UPDATE consultas SET status='agendada' WHERE id=?", (c["consulta_id"],))
     con.commit()
     con.close()
+    return {"ok": True}
+
+
+@app.post("/api/demo/simular-ligacao/{cid}")
+def simular_ligacao(cid: int):
+    """Só para gravar o vídeo: registra o que a Clara combinou na ligação de exemplo (dados fictícios)."""
+    from alcance import ia
+    c = _consultas("WHERE c.id = ?", (cid,))
+    if not c:
+        raise HTTPException(404, "Cidadão não encontrado")
+    for acao in ("confirmar_consulta", "avisar_contato_apoio", "pedir_transporte"):
+        ia.executar_acao(c[0]["consulta_id"], cid, "ligacao", acao, {})
     return {"ok": True}
 
 

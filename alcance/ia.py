@@ -61,7 +61,10 @@ def instrucoes_ligacao(c: dict) -> str:
         jeito.append("A pessoa enxerga pouco: nunca peça para ela ler nada; diga tudo em voz.")
     if c["baixo_letramento"]:
         jeito.append("A pessoa lê pouco: use palavras do dia a dia.")
-    apoio = f"Contato de apoio cadastrado: {c['contato_familia']}." if c["contato_familia"] else "Sem contato de apoio cadastrado."
+    apoio = (f"Contato de apoio cadastrado: {c['contato_familia']} "
+             f"({'a pessoa JÁ AUTORIZOU avisar' if c.get('autoriza_apoio') else 'a pessoa ainda NÃO autorizou avisar'}).") if c["contato_familia"] else "Sem contato de apoio cadastrado."
+    if c.get("faltas_anteriores"):
+        apoio += f" A pessoa faltou {c['faltas_anteriores']} vez(es) antes, mesmo tendo confirmado."
     hora = HORARIOS[c["consulta_id"] % len(HORARIOS)]
     return f"""{persona()}
 Você está LIGANDO para {tratamento}, {c['idade']} anos.
@@ -78,7 +81,7 @@ Como conduzir:
    - falta de transporte: ofereça o transporte da prefeitura para consultas e use pedir_transporte;
    - outro compromisso: ofereça outro dia e use remarcar_consulta;
    - não quer ou não precisa mais: use liberar_vaga, explicando que a vaga vai para outra pessoa da fila.
-5. Se houver contato de apoio, ofereça avisar essa pessoa e use avisar_contato_apoio se ela aceitar.
+5. Rede de apoio: muita gente diz que vai e acaba não indo. Se a pessoa já faltou antes e tem contato de apoio, mesmo que diga que vai, diga que vai avisar também o contato (se já autorizou) ou pergunte com carinho se pode avisar ("posso avisar sua filha também, pra ela te ajudar a lembrar?"). Use avisar_contato_apoio; se a pessoa autorizar agora, passe as palavras dela. Se ela não quiser, respeite e ofereça um lembrete na véspera.
 {REGRAS}"""
 
 
@@ -96,7 +99,8 @@ FERRAMENTAS = [types.Tool(function_declarations=[
                               parameters=types.Schema(type="OBJECT", required=["confirmacao_da_pessoa"], properties={
                                   "motivo": _str("Motivo dito pela pessoa"),
                                   "confirmacao_da_pessoa": _str("As palavras exatas com que a pessoa confirmou que quer liberar a vaga")})),
-    types.FunctionDeclaration(name="avisar_contato_apoio", description="Avisar o contato de apoio (familiar ou vizinho) sobre a consulta."),
+    types.FunctionDeclaration(name="avisar_contato_apoio", description="Avisar o contato de apoio (familiar ou vizinho) sobre a consulta. Só com autorização: se ela não estiver cadastrada, pergunte antes e passe as palavras da pessoa.",
+                              parameters=types.Schema(type="OBJECT", properties={"autorizacao_da_pessoa": _str("O que a pessoa disse ao autorizar, se autorizou agora")})),
     types.FunctionDeclaration(name="agendar_lembrete", description="Ligar de novo para lembrar na véspera."),
     types.FunctionDeclaration(name="encaminhar_para_humano", description="Passar para uma pessoa da equipe da UBS.",
                               parameters=types.Schema(type="OBJECT", properties={"motivo": _str("Por que precisa de um humano")})),
@@ -112,6 +116,21 @@ def executar_acao(consulta_id: int, cidadao_id: int, canal: str, nome: str, args
         return {"ok": False, "mensagem": "Ação NÃO executada. Antes de liberar a vaga, explique que ela vai para outra pessoa "
                                          "e pergunte se a pessoa confirma. Ofereça transporte ou outro dia."}
     con = conectar()
+    if nome == "avisar_contato_apoio":
+        # LGPD: o idoso é adulto e decide. Sem autorização cadastrada nem um "sim" agora, a família não é avisada.
+        cad = con.execute("SELECT autoriza_apoio, contato_familia FROM cidadaos WHERE id=?", (cidadao_id,)).fetchone()
+        sim_agora = len(str((args or {}).get("autorizacao_da_pessoa", "")).split()) >= 2
+        if not cad or not cad["contato_familia"]:
+            con.close()
+            return {"ok": False, "mensagem": "Não há contato de apoio cadastrado. Ofereça cadastrar um no posto."}
+        if not cad["autoriza_apoio"] and not sim_agora:
+            con.close()
+            return {"ok": False, "mensagem": "Ação NÃO executada: a pessoa não autorizou avisar a família. "
+                                             "Pergunte com carinho se pode avisar e respeite a resposta."}
+        if sim_agora and not cad["autoriza_apoio"]:
+            con.execute("UPDATE cidadaos SET autoriza_apoio=1 WHERE id=?", (cidadao_id,))
+            con.execute("INSERT INTO contatos (cidadao_id, consulta_id, canal, resultado) VALUES (?,?,?,?)",
+                        (cidadao_id, consulta_id, canal, f"autorizou_apoio ({args.get('autorizacao_da_pessoa')})"))
     detalhe = "; ".join(f"{k}: {v}" for k, v in (args or {}).items())
     con.execute("INSERT INTO contatos (cidadao_id, consulta_id, canal, resultado) VALUES (?,?,?,?)",
                 (cidadao_id, consulta_id, canal, f"{nome}" + (f" ({detalhe})" if detalhe else "")))
@@ -123,5 +142,6 @@ def executar_acao(consulta_id: int, cidadao_id: int, canal: str, nome: str, args
         "pedir_transporte": "Transporte pedido. O carro passa 1 hora antes da consulta, na porta de casa.",
         "remarcar_consulta": "Pedido de nova data registrado. A equipe confirma o novo horário em até 1 dia.",
         "encaminhar_para_humano": "A equipe da UBS vai retornar a ligação ainda hoje.",
+        "avisar_contato_apoio": "Contato de apoio avisado por mensagem, com dia, hora e o combinado.",
     }
     return {"ok": True, "mensagem": respostas.get(nome, "Registrado.")}

@@ -172,8 +172,11 @@ function TelaConversa({ cena, vistas }: { cena: Cena; vistas: Fala[] }) {
 }
 
 export default function Demo() {
-  const [cenaId, setCenaId] = useState(CENAS[0].id)
-  const [passo, setPasso] = useState(0)
+  // modo de gravação do vídeo do pitch: ?cena=antonio&passo=3 mostra a conversa parada na fala 3
+  const gravacao = new URLSearchParams(window.location.search)
+  const passoFixo = gravacao.has('passo') ? Number(gravacao.get('passo')) : null
+  const [cenaId, setCenaId] = useState(gravacao.get('cena') ?? CENAS[0].id)
+  const [passo, setPasso] = useState(passoFixo ?? 0)
   const [tocando, setTocando] = useState(false)
   const [segundos, setSegundos] = useState(0)
   const cena = CENAS.find((c) => c.id === cenaId)!
@@ -284,7 +287,7 @@ export default function Demo() {
                 <p className="text-lg">Toque em <strong>Ver exemplo</strong> ou faça <strong>de verdade</strong> com o seu celular.</p>
               </div>
             ) : cena.canal === 'ligacao' ? (
-              <TelaLigacao cena={cena} vistas={vistas} falando={tocando ? cena.falas[passo - 1] : real ? vistas[vistas.length - 1] ?? null : null} segundos={segundos} />
+              <TelaLigacao cena={cena} vistas={vistas} falando={tocando || passoFixo ? cena.falas[passo - 1] : real ? vistas[vistas.length - 1] ?? null : null} segundos={segundos} />
             ) : (
               <TelaConversa cena={cena} vistas={vistas} />
             )}

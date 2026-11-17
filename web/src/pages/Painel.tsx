@@ -87,6 +87,8 @@ export default function Painel() {
   const faltasEsperadas = Math.round(dados.reduce((s, c) => s + c.risco_falta, 0))
   const vagasSalvas = Math.round(emRisco.reduce((s, c) => s + c.risco_falta, 0) * 0.3)
   const resolvidas = dados.filter((c) => c.ultima_acao).length
+  const tentativas = dados.reduce((s, c) => s + (c.tentativas || 0), 0)
+  const familias = dados.filter((c) => c.apoio_avisado).length
 
   return (
     <>
@@ -106,7 +108,7 @@ export default function Painel() {
         <Indicador destaque rotulo="Vagas que a Clara deve recuperar" valor={vagasSalvas} detalhe="estimativa conservadora, 14 dias" Icone={HeartHandshake} />
         <Indicador rotulo="Faltas esperadas" valor={<>{faltasEsperadas}<span className="text-xl text-tinta-suave"> / {dados.length}</span></>} detalhe="se ninguém fizer nada" Icone={CalendarX2} />
         <Indicador rotulo="Pessoas na fila da Clara" valor={emRisco.length} detalhe="risco alto ou barreira de acesso" Icone={Users} />
-        <Indicador rotulo="Resolvidas pela Clara" valor={resolvidas} detalhe={`${gov?.acoes_total ?? 0} ações registradas`} Icone={CheckCircle2} />
+        <Indicador rotulo="Resolvidas pela Clara" valor={resolvidas} detalhe={`${tentativas} tentativas registradas · ${familias} famílias avisadas`} Icone={CheckCircle2} />
       </section>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-2">
@@ -153,14 +155,21 @@ export default function Painel() {
                     <td className="py-3.5 pr-4">
                       <BarraRisco valor={c.risco_falta} />
                       {c.barreira && c.risco_falta < 0.3 && <span className="mt-1 block text-sm font-medium text-cobalto">Prioridade por acessibilidade</span>}
+                      {c.faltas_anteriores > 1 && <span className="mt-1 block text-xs font-medium text-risco-medio">Já faltou {c.faltas_anteriores}× tendo confirmado</span>}
                     </td>
                     <td className="py-3.5 pr-4"><SeloCanal canal={c.canal} curto /></td>
                     <td className="py-3.5 pr-4"><Modos modos={c.modos} /></td>
                     <td className="py-3.5 pr-6">
                       {c.ultima_acao ? (
-                        <span className="entra inline-flex items-center gap-1.5 rounded-full bg-risco-baixo px-3 py-1 text-sm font-bold text-papel">
-                          <CheckCircle2 size={15} aria-hidden="true" /> {nomeAcao(c.ultima_acao)}
-                        </span>
+                        <>
+                          <span className="entra inline-flex items-center gap-1.5 rounded-full bg-risco-baixo px-3 py-1 text-sm font-bold text-papel">
+                            <CheckCircle2 size={15} aria-hidden="true" /> {nomeAcao(c.ultima_acao)}
+                          </span>
+                          {!!c.apoio_avisado && !c.ultima_acao.startsWith('avisar_contato_apoio') && (
+                            <span className="entra mt-1.5 inline-flex rounded-full bg-cobalto px-3 py-1 text-sm font-bold text-papel">Família avisada</span>
+                          )}
+                          <span className="mt-1 block text-xs text-tinta-suave">{c.tentativas} {c.tentativas === 1 ? 'tentativa registrada' : 'tentativas registradas'}</span>
+                        </>
                       ) : (
                         <span className="text-sm text-tinta-suave">Aguardando contato</span>
                       )}

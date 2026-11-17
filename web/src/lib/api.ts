@@ -21,6 +21,10 @@ export interface Consulta {
   agente: string
   status: string
   ultima_acao: string | null
+  tentativas: number
+  apoio_avisado: number
+  faltas_anteriores: number
+  autoriza_apoio: number
 }
 
 export function useApi<T>(url: string | null, atualizarACadaMs?: number) {
@@ -49,7 +53,8 @@ export const ACAO: Record<string, string> = {
   remarcar_consulta: 'Pediu nova data',
   pedir_transporte: 'Transporte pedido',
   liberar_vaga: 'Vaga liberada para a fila',
-  avisar_contato_apoio: 'Contato de apoio avisado',
+  avisar_contato_apoio: 'Família avisada',
+  autorizou_apoio: 'Autorizou avisar a família',
   agendar_lembrete: 'Lembrete agendado',
   encaminhar_para_humano: 'Passado para a equipe',
 }
