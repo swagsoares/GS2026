@@ -41,6 +41,7 @@ A Clara é uma **personagem ilustrada**, e não a foto de alguém real nem uma v
 - Na tela de chamada e na foto do contato do WhatsApp (o rosto se mexe quando ela fala).
 - No painel da gestora: "O que a Clara fez agora".
 - Na página do produto para a prefeitura: "Oi, eu sou a Clara."
-- No vídeo, nos slides e na documentação.
+- No vídeo, como animação 2D gerada no Google Flow a partir do desenho original (abertura, ligação, rede de apoio e fechamento), sempre com o aviso de cena gerada com IA.
+- Nos slides e na documentação.
 
 O nome fica em um lugar só no código (`alcance/config.py` e `web/src/components/Clara.tsx`), o que facilita adaptar para cada município se for preciso.

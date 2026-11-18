@@ -21,8 +21,12 @@
     },
     {
       "id": "s00v",
-      "visual": "still:inicio",
+      "visual": "clara:1",
       "visuais": [
+        {
+          "v": "clara:1",
+          "d": 7.9
+        },
         {
           "v": "still:inicio"
         }
@@ -78,11 +82,11 @@
       "texto": "Veja a Clara trabalhando. Ela liga para o Seu Antônio. Esta conversa reproduz uma ligação real que fizemos com o protótipo.",
       "visuais": [
         {
-          "v": "cine:4",
-          "d": 7.9
+          "v": "clara:2",
+          "d": 4.2
         },
         {
-          "v": "tela:demo_inicio"
+          "v": "cine:4"
         }
       ]
     },
@@ -114,6 +118,10 @@
       "id": "s08b",
       "visual": "tela:painel_apoio",
       "visuais": [
+        {
+          "v": "clara:3",
+          "d": 7.9
+        },
         {
           "v": "tela:painel_apoio"
         }
@@ -190,7 +198,7 @@
       "cauda": 3,
       "visuais": [
         {
-          "v": "cine:6",
+          "v": "clara:4",
           "d": 7.9
         },
         {

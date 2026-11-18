@@ -56,8 +56,8 @@ def parte(visual, d, saida, ini=0.0):
         run("-i", TELAS / f"{alvo}.mp4", "-vf", f"fps={FPS},tpad=stop_mode=clone:stop_duration=30,format=yuv420p",
             "-an", "-t", f"{d:.3f}", "-c:v", "libx264", "-preset", "medium", "-crf", "18", saida)
         return
-    if tipo == "cine":
-        run("-ss", f"{ini:.2f}", "-i", CINE / f"cine{alvo}.mp4", "-t", f"{d:.3f}", "-vf",
+    if tipo in ("cine", "clara"):  # cenas do Flow: realistas (cine) e a Clara animada (clara)
+        run("-ss", f"{ini:.2f}", "-i", CINE / f"{tipo}{alvo}.mp4", "-t", f"{d:.3f}", "-vf",
             f"scale=1920:1080:flags=lanczos,fps={FPS},tpad=stop_mode=clone:stop_duration=10,{AVISO},format=yuv420p",
             "-an", "-t", f"{d:.3f}", "-c:v", "libx264", "-preset", "medium", "-crf", "18", saida)
         return
