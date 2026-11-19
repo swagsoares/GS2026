@@ -34,7 +34,15 @@ const TAKES = {
   },
   visitas: { rota: '/visitas', seg: 9, durante: async (js) => { await esperar(4000);
     await js(`[...document.querySelectorAll('button')].find((b) => b.innerText.includes('Marcar visita'))?.click()`); } },
-  governanca: { rota: '/governanca', seg: 16, durante: async (js) => { await esperar(2500); await js(rolar(1300, 11)); } },
+  governanca: {
+    rota: '/governanca', seg: 19,
+    antes: async (js) => { await fetch(`${API}/api/demo/reiniciar/1`, { method: 'POST' }); await fetch(`${API}/api/demo/simular-ligacao/1`, { method: 'POST' });
+      await esperar(1500); await js(`location.reload()`); await esperar(3500);
+      await js(`(() => { const el = [...document.querySelectorAll('p')].find((x) => x.innerText.includes('O modelo esqueceu') || x.innerText.includes('esquecia os idosos'));
+        el && scrollTo(0, el.getBoundingClientRect().top + scrollY - 140); })()`); },
+    durante: async (js) => { await esperar(5000); await js(rolar(520, 12)); },
+    depois: async () => { await fetch(`${API}/api/demo/reiniciar/1`, { method: 'POST' }); },
+  },
   negocio: { rota: '/', seg: 9, antes: async (js) => { await esperar(2500);
     await js(`scrollTo(0, document.getElementById('negocio').getBoundingClientRect().top + scrollY - 40)`); } },
 };

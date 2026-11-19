@@ -20,20 +20,6 @@
       "corte_inicio": 2.6
     },
     {
-      "id": "s00v",
-      "visual": "clara:1",
-      "visuais": [
-        {
-          "v": "clara:1",
-          "d": 7.9
-        },
-        {
-          "v": "still:inicio"
-        }
-      ],
-      "texto": "Esta é a Clara. Não é mais um lembrete por SMS: ela liga para quem não consegue ler, resolve na hora e avisa a família."
-    },
-    {
       "id": "s01",
       "visual": "slide:antonio",
       "texto": "O Seu Antônio tem sessenta e oito anos e quase não enxerga por causa do diabetes. Ele esperou três meses por uma consulta de vista. O posto mandou um SMS para confirmar. Ele não conseguiu ler. Faltou. E agora a regra diz que ele espera mais trinta dias para tentar de novo. O Seu Antônio não perdeu a consulta por descuido. Perdeu porque o serviço público fala uma língua que ele não consegue ouvir.",
@@ -59,17 +45,41 @@
     {
       "id": "s03",
       "visual": "slide:tese",
-      "texto": "Por isso criamos a Clara, a assistente virtual do posto de saúde. A ideia é simples: em vez de a pessoa se adaptar ao serviço, a Clara se adapta à pessoa e vai até ela."
+      "texto": "Por isso criamos a Clara, a assistente virtual do posto de saúde. A ideia é simples: em vez de a pessoa se adaptar ao serviço, a Clara se adapta à pessoa e vai até ela.",
+      "visuais": [
+        {
+          "v": "clara:1",
+          "d": 7.9
+        },
+        {
+          "v": "slide:tese"
+        }
+      ],
+      "antes": 0.6,
+      "depois": 1.0
+    },
+    {
+      "id": "s00v",
+      "visual": "still:inicio",
+      "visuais": [
+        {
+          "v": "still:inicio"
+        }
+      ],
+      "texto": "Não é mais um lembrete por SMS: ela liga para quem não consegue ler, resolve na hora e avisa a família.",
+      "antes": 0.3,
+      "depois": 1.3
     },
     {
       "id": "s03b",
-      "visual": "still:inicio",
+      "visual": "slide:capa",
       "texto": "A Clara é uma persona, assim como a personagem Lu, do Magalu, e a Bia, do Bradesco: tem nome e rosto para que as pessoas confiem e lembrem dela. Mas ela nunca finge ser gente. Se perguntarem, diz que é uma assistente virtual.",
       "visuais": [
         {
-          "v": "tela:inicio"
+          "v": "slide:capa"
         }
-      ]
+      ],
+      "depois": 1.2
     },
     {
       "id": "s04",
@@ -159,7 +169,8 @@
     {
       "id": "s12",
       "visual": "slide:tecnologia",
-      "texto": "Por trás disso: voz em tempo real com o Gemini, telefonia pela Twilio, e um modelo que prevê quem tem mais risco de faltar, treinado com cento e dez mil consultas reais do SUS."
+      "texto": "Por trás disso: voz em tempo real com o Gemini, telefonia pela Twilio, e um modelo que prevê quem tem mais risco de faltar, treinado com cento e dez mil consultas reais do SUS.",
+      "depois": 0.9
     },
     {
       "id": "s13",
@@ -174,7 +185,8 @@
         {
           "v": "tela:governanca"
         }
-      ]
+      ],
+      "depois": 1.3
     },
     {
       "id": "s15",

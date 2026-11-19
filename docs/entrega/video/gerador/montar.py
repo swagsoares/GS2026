@@ -88,7 +88,7 @@ def clipe(nome, visuais, audio, total, inicio, som_do_clipe=None, ini=0.0):
         filtro_a = "[1:a]aresample=48000,volume=0.9,apad[a]"
     elif audio:
         entrada = ["-i", audio]
-        filtro_a = f"[1:a]aresample=48000,adelay={int(inicio * 1000)}:all=1,apad[a]"
+        filtro_a = f"[1:a]aresample=48000,afade=t=in:d=0.04,areverse,afade=t=in:d=0.12,areverse,adelay={int(inicio * 1000)}:all=1,apad[a]"
     else:
         entrada = ["-f", "lavfi", "-i", "anullsrc=r=48000:cl=mono"]
         filtro_a = "[1:a]apad[a]"
@@ -97,7 +97,31 @@ def clipe(nome, visuais, audio, total, inicio, som_do_clipe=None, ini=0.0):
 
 clipes, srt, t = [], [], 0.0
 
-def add_legenda(texto, ini, fim, quem=None):
+def falas_do_audio(arq):
+    """Intervalos em que há voz (desconta pausas >= 0,25 s)."""
+    out = subprocess.run(["ffmpeg", "-hide_banner", "-i", str(arq), "-af", "silencedetect=n=-38dB:d=0.25", "-f", "null", "-"],
+                         capture_output=True, text=True).stderr
+    ini = [float(x) for x in re.findall(r"silence_start: ([\d.]+)", out)]
+    fim = [float(x) for x in re.findall(r"silence_end: ([\d.]+)", out)]
+    total = dur(arq)
+    trechos, cur = [], 0.0
+    for a, b in zip(ini, fim):
+        if a > cur:
+            trechos.append((cur, a))
+        cur = b
+    if cur < total:
+        trechos.append((cur, total))
+    return trechos or [(0.0, total)]
+
+def fala_para_relogio(trechos, alvo):
+    acum = 0.0
+    for a, b in trechos:
+        if acum + (b - a) >= alvo:
+            return a + (alvo - acum)
+        acum += b - a
+    return trechos[-1][1]
+
+def add_legenda(texto, ini, fim, quem=None, audio=None):
     texto = legenda(texto)
     partes = []
     for frase in re.split(r"(?<=[.?!:])\s+", texto):
@@ -108,6 +132,16 @@ def add_legenda(texto, ini, fim, quem=None):
         if frase:
             partes.append(frase)
     total = sum(len(p) for p in partes)
+    if audio:
+        trechos = falas_do_audio(audio)
+        fala = sum(b - a for a, b in trechos)
+        acum = 0
+        for p in partes:
+            a = fala_para_relogio(trechos, fala * acum / total)
+            acum += len(p)
+            b = fala_para_relogio(trechos, fala * acum / total)
+            srt.append((ini + a, ini + b + 0.15, f"{quem}: {p}" if quem else p))
+        return
     cur = ini
     for p in partes:
         d = (fim - ini) * len(p) / total
@@ -128,7 +162,7 @@ for s in cfg["segmentos"]:
                 a = AUD / f"d_{alvo}_{k}.wav"; d = dur(a)
                 total = 0.25 + d + ENTRE_FALAS
                 clipe(f"{s['id']}_{k}", [(v, None)], a, total, 0.25)
-                add_legenda(texto, t + 0.25, t + 0.25 + d, NOMES[quem])
+                add_legenda(texto, t + 0.25, t + 0.25 + d, NOMES[quem], audio=a)
             else:
                 total = 2.2
                 clipe(f"{s['id']}_{k}", [(v, None)], None, total, 0)
@@ -137,9 +171,10 @@ for s in cfg["segmentos"]:
     vis = visuais_de(s)
     if s.get("texto"):
         a = AUD / f"{s['id']}.wav"; d = dur(a)
-        total = max(ANTES + d + DEPOIS + s.get("cauda", 0), sum(x for _, x in vis if x) + 0.5)
-        clipe(s["id"], vis, a, total, ANTES)
-        add_legenda(s["texto"], t + ANTES, t + ANTES + d)
+        antes, depois = s.get("antes", ANTES), s.get("depois", DEPOIS)
+        total = max(antes + d + depois + s.get("cauda", 0), sum(x for _, x in vis if x) + 0.5)
+        clipe(s["id"], vis, a, total, antes)
+        add_legenda(s["texto"], t + antes, t + antes + d, audio=a)
     else:
         total = s.get("silencio", 2)
         som = CINE / f"cine{vis[0][0].split(':')[1]}.mp4" if s.get("som_do_clipe") else None
