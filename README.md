@@ -12,6 +12,8 @@ O serviço público foi desenhado para quem enxerga, ouve, lê bem e tem interne
 
 A **Clara** é a persona: assistente virtual do posto, com nome e rosto, que sempre diz que é virtual. Com a **rede de apoio**, quando a pessoa já faltou mesmo confirmando, ela avisa também um familiar, só com autorização do idoso, e cada tentativa de contato fica registrada.
 
+🎬 **Vídeo pitch (5min52s):** https://youtu.be/NNpWsZl3IfE
+
 **Comece por aqui:** [Documento do projeto](docs/DOCUMENTO_DO_PROJETO.md) (as 6 perguntas do desafio) · **Documentação ABNT:** [PDF](docs/entrega/Clara_Documentacao_ABNT.pdf) · [Word](docs/entrega/Clara_Documentacao_ABNT.docx)
 Mais: [Persona Clara](docs/PERSONA_CLARA.md) · [Caso de negócio](docs/CASO_DE_NEGOCIO.md) · [Governança da IA](docs/GOVERNANCA.md) · [Roteiro do pitch](docs/ROTEIRO_PITCH.md) · [Dados e fontes](PESQUISA.md) · [Plano de trabalho](PLANO_GS.md)
 

@@ -287,7 +287,7 @@ T.push(item('c) painel da UBS atualizado ao vivo a cada ação da IA e lista de 
 T.push(item('d) página de governança com o resultado da avaliação (17/17), a ficha e o viés do modelo, os incidentes corrigidos e a trilha de auditoria;'));
 T.push(item('e) rede de apoio: aviso à família somente com autorização do idoso, bloqueado em código quando ela não existe, e registro de cada tentativa de contato;'));
 T.push(item('f) catorze testes automatizados cobrindo escolha de canal, banco de dados, segurança do webhook, trava de ação irreversível, mascaramento de dados, viés, prioridade por acessibilidade e bloqueio de ação sem o "sim" da pessoa e consentimento para avisar a família.'));
-T.push(p('A solução contribui para os Objetivos de Desenvolvimento Sustentável 3 (saúde e bem-estar), 10 (redução das desigualdades), 11 (cidades sustentáveis) e 16 (instituições eficazes). O código-fonte está disponível em https://github.com/swagsoares/GS2026.'));
+T.push(p('A solução contribui para os Objetivos de Desenvolvimento Sustentável 3 (saúde e bem-estar), 10 (redução das desigualdades), 11 (cidades sustentáveis) e 16 (instituições eficazes). O código-fonte está disponível em https://github.com/swagsoares/GS2026 e o vídeo de apresentação em https://youtu.be/NNpWsZl3IfE.'));
 
 T.push(h1('9 CONCLUSÃO'));
 T.push(p('Este trabalho partiu da vida real de quem o serviço público digital deixa de fora e chegou a uma solução que inverte a lógica de atendimento: em vez de exigir que o cidadão se adapte à tecnologia, a tecnologia se adapta ao cidadão e vai até ele. A Clara combina, de forma inédita no contexto brasileiro, atendimento proativo, funcionamento sem internet, adaptação à deficiência de cada pessoa e um agente humano como terceira frente, integrados ao fluxo do SUS.'));
@@ -317,7 +317,7 @@ const refs = [h1('REFERÊNCIAS', { semNumero: true }),
   ...REFS.map((r) => new Paragraph({ children: runs(r), alignment: AlignmentType.LEFT, spacing: { ...L1, after: 240 } }))];
 
 const apendice = [h1('APÊNDICE A – REPOSITÓRIO E EXECUÇÃO DO PROTÓTIPO', { semNumero: true }),
-  p('O código-fonte, os documentos e os testes estão em https://github.com/swagsoares/GS2026. O arquivo README descreve a instalação. Resumidamente: criar o ambiente Python e instalar as dependências do arquivo requirements.txt; iniciar a API com o servidor uvicorn na porta 8000; instalar e iniciar o site React na pasta web; e, para ligação e WhatsApp reais, preencher as chaves no arquivo .env (fora do repositório) e abrir o túnel público com o módulo alcance.tunel.'),
+  p('O código-fonte, os documentos e os testes estão em https://github.com/swagsoares/GS2026. O vídeo de apresentação (pitch) está em https://youtu.be/NNpWsZl3IfE. O arquivo README descreve a instalação. Resumidamente: criar o ambiente Python e instalar as dependências do arquivo requirements.txt; iniciar a API com o servidor uvicorn na porta 8000; instalar e iniciar o site React na pasta web; e, para ligação e WhatsApp reais, preencher as chaves no arquivo .env (fora do repositório) e abrir o túnel público com o módulo alcance.tunel.'),
   p('A pasta docs reúne o documento do projeto, o caso de negócio detalhado, a governança de IA, o roteiro do vídeo e os slides. Os testes são executados com o pytest, e a avaliação do assistente, com o módulo alcance.avaliacao.')];
 
 // ---------- SUMÁRIO ----------
