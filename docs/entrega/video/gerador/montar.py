@@ -125,9 +125,9 @@ def add_legenda(texto, ini, fim, quem=None, audio=None):
     texto = legenda(texto)
     partes = []
     for frase in re.split(r"(?<=[.?!:])\s+", texto):
-        while len(frase) > 90:
-            corte = frase.rfind(",", 0, 90)
-            corte = corte if corte > 30 else frase.rfind(" ", 0, 90)
+        while len(frase) > 68:
+            corte = frase.rfind(", ", 0, 68)
+            corte = corte if corte > 25 else frase.rfind(" ", 0, 68)
             partes.append(frase[:corte + 1].strip()); frase = frase[corte + 1:].strip()
         if frase:
             partes.append(frase)
@@ -184,7 +184,30 @@ for s in cfg["segmentos"]:
 
 lista = TMP / "lista.txt"
 lista.write_text("".join(f"file '{c.as_posix()}'\n" for c in clipes), encoding="utf-8")
-run("-f", "concat", "-safe", "0", "-i", lista, "-c", "copy", AQUI / "bruto.mp4")
+# áudio montado em WAV (PCM emenda exato; AAC com -c copy deixava buracos e estalos entre os trechos)
+def probe(arq, stream="v:0"):
+    return float(subprocess.run(["ffprobe", "-v", "error", "-select_streams", stream, "-show_entries", "stream=duration",
+                                 "-of", "csv=p=0", str(arq)], capture_output=True, text=True).stdout.strip())
+wavs, so_video = [], []
+for c in clipes:
+    dv = probe(c)
+    w = TMP / f"{c.stem}_a.wav"
+    run("-i", c, "-vn", "-ac", "1", "-ar", "48000", "-af", f"aresample=48000:async=1:first_pts=0,apad,atrim=end_sample={round(dv * 48000)}", "-c:a", "pcm_s16le", w)
+    vol = subprocess.run(["ffmpeg", "-hide_banner", "-i", str(w), "-af", "ebur128", "-f", "null", "-"], capture_output=True, text=True).stderr
+    m = re.findall(r"I:\s+([-\d.]+) LUFS", vol)
+    lufs = float(m[-1]) if m else -70
+    if -50 < lufs and not c.stem.startswith("s00_") and c.stem != "s00":   # mesma altura de voz em todos os trechos (diálogos estavam mais altos)
+        w2 = TMP / f"{c.stem}_n.wav"
+        ganho = max(min(-20 - lufs, 8), -8)
+        run("-i", w, "-af", f"volume={ganho:.2f}dB,alimiter=limit=0.95", "-c:a", "pcm_s16le", w2); w = w2
+    wavs.append(w)
+    v = TMP / f"{c.stem}_sv.mp4"; run("-i", c, "-an", "-c", "copy", v); so_video.append(v)
+(TMP / "lista_a.txt").write_text("".join(f"file '{w.as_posix()}'\n" for w in wavs), encoding="utf-8")
+(TMP / "lista_v.txt").write_text("".join(f"file '{v.as_posix()}'\n" for v in so_video), encoding="utf-8")
+run("-f", "concat", "-safe", "0", "-i", TMP / "lista_a.txt", "-c", "copy", TMP / "audio_total.wav")
+run("-f", "concat", "-safe", "0", "-i", TMP / "lista_v.txt", "-c", "copy", TMP / "video_total.mp4")
+run("-i", TMP / "video_total.mp4", "-i", TMP / "audio_total.wav", "-map", "0:v", "-map", "1:a", "-c:v", "copy", "-c:a", "aac", "-b:a", "192k", "-ar", "48000", AQUI / "bruto.mp4")
+t = probe(AQUI / "bruto.mp4")
 
 def ts(x):
     h, r = divmod(x, 3600); m, sec = divmod(r, 60)
@@ -211,6 +234,6 @@ linhas = "".join(f"Dialogue: 0,{ass_ts(a)},{ass_ts(b)},Padrao,,0,0,0,,{txt}\n" f
 (AQUI / "legendas.ass").write_text(cab + linhas, encoding="utf-8")
 sub = (AQUI / "legendas.ass").as_posix().replace(":", "\\:")
 run("-i", AQUI / "bruto.mp4", "-vf", f"fade=t=in:st=0:d=0.8,fade=t=out:st={t - 1.2:.2f}:d=1.2,ass='{sub}'",
-    "-af", f"loudnorm=I=-16:TP=-1.5:LRA=11,afade=t=out:st={t - 1.2:.2f}:d=1.2",
+    "-af", f"loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000,afade=t=out:st={t - 1.2:.2f}:d=1.2",
     "-c:v", "libx264", "-preset", "medium", "-crf", "20", "-c:a", "aac", "-b:a", "160k", AQUI / "Clara_pitch.mp4")
 print(f"pronto: {t:.1f}s ({int(t // 60)}min{int(t % 60):02d}s), {len(srt)} legendas")

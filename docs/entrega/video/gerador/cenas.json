@@ -158,11 +158,7 @@
       "texto": "E a agente Rosa sabe quem precisa de uma visita hoje, começando por quem não tem telefone.",
       "visuais": [
         {
-          "v": "cine:5",
-          "d": 7.9
-        },
-        {
-          "v": "tela:visitas"
+          "v": "cine:5"
         }
       ]
     },

@@ -1,452 +1,504 @@
 1
-00:00:05,549 --> 00:00:09,188
+00:00:05,530 --> 00:00:10,475
 O Seu Antônio tem 68 anos e quase não enxerga por causa do diabetes.
 
 2
-00:00:09,038 --> 00:00:11,986
+00:00:10,495 --> 00:00:13,198
 Ele esperou três meses por uma consulta de vista.
 
 3
-00:00:11,836 --> 00:00:14,209
+00:00:13,217 --> 00:00:15,524
 O posto mandou um SMS para confirmar.
 
 4
-00:00:14,059 --> 00:00:15,256
+00:00:15,544 --> 00:00:16,737
 Ele não conseguiu ler.
 
 5
-00:00:15,106 --> 00:00:16,055
+00:00:16,757 --> 00:00:17,564
 Faltou.
 
 6
-00:00:15,905 --> 00:00:20,258
+00:00:17,584 --> 00:00:21,014
 E agora a regra diz que ele espera mais 30 dias para tentar de novo.
 
 7
-00:00:20,108 --> 00:00:23,039
+00:00:21,034 --> 00:00:23,565
 O Seu Antônio não perdeu a consulta por descuido.
 
 8
-00:00:22,889 --> 00:00:27,373
-Perdeu porque o serviço público fala uma língua que ele não consegue ouvir.
+00:00:23,585 --> 00:00:25,949
+Perdeu porque o serviço público fala uma língua que ele não
 
 9
-00:00:28,123 --> 00:00:30,102
-E ele não está sozinho.
+00:00:25,969 --> 00:00:27,269
+consegue ouvir.
 
 10
-00:00:29,952 --> 00:00:33,702
-São 18,6 milhões de brasileiros com deficiência, e 7,
+00:00:27,713 --> 00:00:28,994
+E ele não está sozinho.
 
 11
-00:00:33,552 --> 00:00:36,534
-9 milhões têm dificuldade para enxergar.
+00:00:29,014 --> 00:00:32,175
+São 18,6 milhões de brasileiros com deficiência,
 
 12
-00:00:36,384 --> 00:00:39,367
-29% da população é analfabeta funcional.
+00:00:32,195 --> 00:00:35,119
+e 7,9 milhões têm dificuldade para enxergar.
 
 13
-00:00:39,217 --> 00:00:41,548
-28 milhões não usam internet.
+00:00:35,139 --> 00:00:38,137
+29% da população é analfabeta funcional.
 
 14
-00:00:41,398 --> 00:00:47,422
-E 69% das famílias das classes D e E ficam sem dados no celular antes do fim do mês.
+00:00:38,157 --> 00:00:40,647
+28 milhões não usam internet.
 
 15
-00:00:47,272 --> 00:00:51,792
-Enquanto isso, o serviço público aposta em SMS, aplicativo e site.
+00:00:40,667 --> 00:00:45,029
+E 69% das famílias das classes D e E ficam sem dados no celular
 
 16
-00:00:51,642 --> 00:00:56,569
-Só 2,9% dos sites brasileiros passam em todos os testes de acessibilidade.
+00:00:45,049 --> 00:00:46,389
+antes do fim do mês.
 
 17
-00:00:56,419 --> 00:00:58,536
-O resultado aparece na fila:
+00:00:46,409 --> 00:00:50,891
+Enquanto isso, o serviço público aposta em SMS, aplicativo e site.
 
 18
-00:00:58,386 --> 00:01:01,555
-até 38,6% das consultas especializadas viram falta.
+00:00:50,911 --> 00:00:54,729
+Só 2,9% dos sites brasileiros passam em todos os testes de
 
 19
-00:01:01,405 --> 00:01:05,469
-Vaga paga, médico esperando, cadeira vazia.
+00:00:54,750 --> 00:00:55,875
+acessibilidade.
 
 20
-00:01:06,749 --> 00:01:10,688
-Por isso criamos a Clara, a assistente virtual do posto de saúde.
+00:00:55,895 --> 00:00:57,529
+O resultado aparece na fila:
 
 21
-00:01:10,538 --> 00:01:11,925
-A ideia é simples:
+00:00:57,549 --> 00:01:01,935
+até 38,6% das consultas especializadas viram falta.
 
 22
-00:01:11,775 --> 00:01:16,320
-em vez de a pessoa se adaptar ao serviço, a Clara se adapta à pessoa e vai até ela.
+00:01:01,955 --> 00:01:05,188
+Vaga paga, médico esperando, cadeira vazia.
 
 23
-00:01:17,798 --> 00:01:19,793
-Não é mais um lembrete por SMS:
+00:01:06,198 --> 00:01:09,875
+Por isso criamos a Clara, a assistente virtual do posto de saúde.
 
 24
-00:01:19,643 --> 00:01:25,028
-ela liga para quem não consegue ler, resolve na hora e avisa a família.
+00:01:09,895 --> 00:01:11,100
+A ideia é simples:
 
 25
-00:01:26,528 --> 00:01:31,180
-A Clara é uma persona, assim como a personagem Lu, do Magalu, e a BIA, do Bradesco:
+00:01:11,120 --> 00:01:13,370
+em vez de a pessoa se adaptar ao serviço,
 
 26
-00:01:31,030 --> 00:01:34,900
-tem nome e rosto para que as pessoas confiem e lembrem dela.
+00:01:13,390 --> 00:01:15,930
+a Clara se adapta à pessoa e vai até ela.
 
 27
-00:01:34,750 --> 00:01:36,997
-Mas ela nunca finge ser gente.
+00:01:17,061 --> 00:01:19,522
+Não é mais um lembrete por SMS:
 
 28
-00:01:36,847 --> 00:01:39,965
-Se perguntarem, diz que é uma assistente virtual.
+00:01:19,542 --> 00:01:21,609
+ela liga para quem não consegue ler,
 
 29
-00:01:41,788 --> 00:01:42,830
-Por três caminhos.
+00:01:21,629 --> 00:01:23,908
+resolve na hora e avisa a família.
 
 30
-00:01:42,680 --> 00:01:46,333
-Quem tem smartphone conversa pelo WhatsApp, em áudio ou texto.
+00:01:25,489 --> 00:01:28,910
+A Clara é uma persona, assim como a personagem Lu, do Magalu,
 
 31
-00:01:46,183 --> 00:01:51,332
-Quem tem celular simples, ou ficou sem internet, recebe uma ligação de voz.
+00:01:28,930 --> 00:01:30,890
+e a BIA, do Bradesco:
 
 32
-00:01:51,182 --> 00:01:56,196
-E quem não tem telefone recebe a visita do agente comunitário, que já existe no SUS:
+00:01:30,910 --> 00:01:34,484
+tem nome e rosto para que as pessoas confiem e lembrem dela.
 
 33
-00:01:56,046 --> 00:01:57,286
-são 285 mil no Brasil.
+00:01:34,504 --> 00:01:36,286
+Mas ela nunca finge ser gente.
 
 34
-00:01:57,136 --> 00:02:00,028
-E cada pessoa tem um perfil de acessibilidade:
+00:01:36,306 --> 00:01:38,750
+Se perguntarem, diz que é uma assistente virtual.
 
 35
-00:01:59,878 --> 00:02:03,444
-voz mais lenta, linguagem simples, Libras.
+00:01:40,272 --> 00:01:41,730
+Por três caminhos.
 
 36
-00:02:04,583 --> 00:02:06,401
-Veja a Clara trabalhando.
+00:01:41,750 --> 00:01:45,222
+Quem tem smartphone conversa pelo WhatsApp, em áudio ou texto.
 
 37
-00:02:06,251 --> 00:02:08,219
-Ela liga para o Seu Antônio.
+00:01:45,242 --> 00:01:47,809
+Quem tem celular simples, ou ficou sem internet,
 
 38
-00:02:08,069 --> 00:02:11,834
-Esta conversa reproduz uma ligação real que fizemos com o protótipo.
+00:01:47,829 --> 00:01:48,870
+recebe uma ligação de voz.
 
 39
-00:02:12,484 --> 00:02:13,721
-Clara: Oi, seu Antônio!
+00:01:48,890 --> 00:01:52,654
+E quem não tem telefone recebe a visita do agente comunitário,
 
 40
-00:02:13,571 --> 00:02:17,593
-Clara: Aqui é a Clara, assistente virtual do seu posto de saúde.
+00:01:52,674 --> 00:01:53,956
+que já existe no SUS:
 
 41
-00:02:17,443 --> 00:02:20,854
-Clara: A Rosa, sua agente de saúde, pediu pra eu ligar.
+00:01:53,976 --> 00:01:56,471
+são 285 mil no Brasil.
 
 42
-00:02:20,704 --> 00:02:22,816
-Clara: Tudo bem com o senhor?
+00:01:56,491 --> 00:01:58,910
+E cada pessoa tem um perfil de acessibilidade:
 
 43
-00:02:23,366 --> 00:02:24,923
-Seu Antônio: Tudo bem, minha filha.
+00:01:58,930 --> 00:02:01,989
+voz mais lenta, linguagem simples, Libras.
 
 44
-00:02:25,473 --> 00:02:29,706
-Clara: O senhor tem consulta de vista nesta quinta, às nove da manhã.
+00:02:02,856 --> 00:02:04,215
+Veja a Clara trabalhando.
 
 45
-00:02:29,556 --> 00:02:30,939
-Clara: O senhor consegue ir?
+00:02:04,235 --> 00:02:05,700
+Ela liga para o Seu Antônio.
 
 46
-00:02:31,489 --> 00:02:33,727
-Seu Antônio: Ih, não tenho quem me leve, não.
+00:02:05,720 --> 00:02:10,135
+Esta conversa reproduz uma ligação real que fizemos com o protótipo.
 
 47
-00:02:34,277 --> 00:02:34,854
-Clara: Entendi.
+00:02:10,155 --> 00:02:11,509
+Clara: Oi, seu Antônio!
 
 48
-00:02:34,704 --> 00:02:38,637
-Clara: Posso pedir o carro da prefeitura para buscar o senhor em casa.
+00:02:11,530 --> 00:02:15,649
+Clara: Aqui é a Clara, assistente virtual do seu posto de saúde.
 
 49
-00:02:38,487 --> 00:02:39,970
-Clara: Quer que eu peça?
+00:02:15,669 --> 00:02:18,908
+Clara: A Rosa, sua agente de saúde, pediu pra eu ligar.
 
 50
-00:02:40,520 --> 00:02:41,445
-Seu Antônio: Quero, sim.
+00:02:18,928 --> 00:02:20,228
+Clara: Tudo bem com o senhor?
 
 51
-00:02:41,295 --> 00:02:42,501
-Seu Antônio: Deus lhe pague.
+00:02:20,776 --> 00:02:22,169
+Seu Antônio: Tudo bem, minha filha.
 
 52
-00:02:43,051 --> 00:02:43,631
-Clara: Pronto.
+00:02:22,838 --> 00:02:26,838
+Clara: O senhor tem consulta de vista nesta quinta, às nove da manhã.
 
 53
-00:02:43,481 --> 00:02:44,980
-Clara: O carro passa às oito.
+00:02:26,858 --> 00:02:28,729
+Clara: O senhor consegue ir?
 
 54
-00:02:44,830 --> 00:02:49,823
-Clara: Vou avisar sua vizinha também, e na quarta eu ligo de novo para lembrar.
+00:02:28,749 --> 00:02:30,829
+Seu Antônio: Ih, não tenho quem me leve, não.
 
 55
-00:02:50,473 --> 00:02:51,176
-Repare:
+00:02:31,588 --> 00:02:32,680
+Clara: Entendi.
 
 56
-00:02:51,026 --> 00:02:55,171
-quando ele disse que não tinha como ir, a Clara não liberou a vaga.
+00:02:32,700 --> 00:02:36,195
+Clara: Posso pedir o carro da prefeitura para buscar o senhor em casa.
 
 57
-00:02:55,021 --> 00:02:56,353
-Ela resolveu o problema dele.
+00:02:36,215 --> 00:02:37,688
+Clara: Quer que eu peça?
 
 58
-00:02:56,203 --> 00:02:59,200
-E se apresentou em nome do posto que ele conhece,
+00:02:37,708 --> 00:02:38,549
+Seu Antônio: Quero, sim.
 
 59
-00:02:59,050 --> 00:03:02,132
-porque desconfiar de ligação é sinal de esperteza, não de atraso.
+00:02:38,569 --> 00:02:40,229
+Seu Antônio: Deus lhe pague.
 
 60
-00:03:03,345 --> 00:03:05,744
-E no painel da gestora, tudo acontece ao vivo:
+00:02:40,249 --> 00:02:41,086
+Clara: Pronto.
 
 61
-00:03:05,594 --> 00:03:07,792
-aparece o que a Clara acabou de fazer,
+00:02:41,106 --> 00:02:42,697
+Clara: O carro passa às oito.
 
 62
-00:03:07,642 --> 00:03:12,324
-e a consulta do Seu Antônio sobe para o topo da fila, com o transporte pedido.
+00:02:42,717 --> 00:02:44,656
+Clara: Vou avisar sua vizinha também,
 
 63
-00:03:13,074 --> 00:03:18,137
-E como muita gente diz que vai e acaba não indo, a Clara também avisa a família,
+00:02:44,676 --> 00:02:46,968
+Clara: e na quarta eu ligo de novo para lembrar.
 
 64
-00:03:17,987 --> 00:03:20,309
-sempre com a permissão do idoso.
+00:02:47,732 --> 00:02:48,515
+Repare:
 
 65
-00:03:20,159 --> 00:03:22,331
-Cada tentativa fica registrada:
+00:02:48,535 --> 00:02:51,960
+quando ele disse que não tinha como ir, a Clara não liberou a vaga.
 
 66
-00:03:22,181 --> 00:03:24,556
-a UBS consegue mostrar que tentou.
+00:02:51,980 --> 00:02:53,248
+Ela resolveu o problema dele.
 
 67
-00:03:25,306 --> 00:03:26,552
-A Dona Benedita lê pouco.
+00:02:53,269 --> 00:02:55,876
+E se apresentou em nome do posto que ele conhece,
 
 68
-00:03:26,402 --> 00:03:29,947
-Ela fotografa uma carta que não entendeu e manda um áudio.
+00:02:55,896 --> 00:02:59,998
+porque desconfiar de ligação é sinal de esperteza, não de atraso.
 
 69
-00:03:33,257 --> 00:03:35,971
-Dona Benedita: Chegou essa carta aqui, o que é isso?
+00:03:00,018 --> 00:03:02,784
+E no painel da gestora, tudo acontece ao vivo:
 
 70
-00:03:36,521 --> 00:03:43,130
-Clara: Dona Benedita, essa carta pede para a senhora atualizar o seu cadastro no CRAS até 30 de
+00:03:02,804 --> 00:03:04,229
+aparece o que a Clara acabou de fazer,
 
 71
-00:03:42,980 --> 00:03:43,791
-Clara: novembro.
+00:03:04,250 --> 00:03:07,048
+e a consulta do Seu Antônio sobe para o topo da fila,
 
 72
-00:03:43,641 --> 00:03:47,387
-Clara: Se não atualizar, o benefício pode ser bloqueado.
+00:03:07,068 --> 00:03:09,390
+com o transporte pedido.
 
 73
-00:03:47,937 --> 00:03:51,194
-Clara: É só levar o RG, o CPF e uma conta de luz.
+00:03:09,410 --> 00:03:12,210
+E como muita gente diz que vai e acaba não indo,
 
 74
-00:03:51,044 --> 00:03:54,977
-Clara: O CRAS mais perto fica na Rua das Flores, 120.
+00:03:12,230 --> 00:03:16,094
+a Clara também avisa a família, sempre com a permissão do idoso.
 
 75
-00:03:54,827 --> 00:03:58,644
-Clara: Quer que eu marque um horário para a senhora?
+00:03:16,114 --> 00:03:18,310
+Cada tentativa fica registrada:
 
 76
-00:03:59,194 --> 00:04:00,742
-Dona Benedita: Quero, de manhã.
+00:03:18,330 --> 00:03:21,227
+a UBS consegue mostrar que tentou.
 
 77
-00:04:01,292 --> 00:04:03,126
-Clara: Marquei para terça, às nove.
+00:03:21,247 --> 00:03:22,950
+A Dona Benedita lê pouco.
 
 78
-00:04:02,976 --> 00:04:06,015
-Clara: Eu mando um áudio na segunda para lembrar.
+00:03:22,970 --> 00:03:26,009
+Ela fotografa uma carta que não entendeu e manda um áudio.
 
 79
-00:04:06,665 --> 00:04:11,542
-E a agente Rosa sabe quem precisa de uma visita hoje, começando por quem não tem telefone.
+00:03:28,849 --> 00:03:32,030
+Dona Benedita: Chegou essa carta aqui, o que é isso?
 
 80
-00:04:15,065 --> 00:04:16,031
-Por trás disso:
+00:03:32,050 --> 00:03:36,208
+Clara: Dona Benedita, essa carta pede para a senhora atualizar o seu
 
 81
-00:04:15,881 --> 00:04:19,232
-voz em tempo real com o Gemini, telefonia pela Twilio,
+00:03:36,228 --> 00:03:39,563
+Clara: cadastro no CRAS até 30 de novembro.
 
 82
-00:04:19,082 --> 00:04:22,947
-e um modelo que prevê quem tem mais risco de faltar,
+00:03:39,583 --> 00:03:43,327
+Clara: Se não atualizar, o benefício pode ser bloqueado.
 
 83
-00:04:22,797 --> 00:04:25,666
-treinado com 110 mil consultas reais do SUS.
+00:03:43,347 --> 00:03:47,793
+Clara: É só levar o RG, o CPF e uma conta de luz.
 
 84
-00:04:26,766 --> 00:04:29,475
-Mas o que mais nos orgulha é a governança.
+00:03:47,813 --> 00:03:51,874
+Clara: O CRAS mais perto fica na Rua das Flores, 120.
 
 85
-00:04:29,325 --> 00:04:33,197
-Uma bateria de testes com perguntas difíceis roda a cada mudança,
+00:03:51,894 --> 00:03:54,492
+Clara: Quer que eu marque um horário para a senhora?
 
 86
-00:04:33,047 --> 00:04:34,853
-e hoje a Clara passa em 17 de 17.
+00:03:54,512 --> 00:03:56,557
+Dona Benedita: Quero, de manhã.
 
 87
-00:04:34,703 --> 00:04:37,277
-Os testes encontraram erros de verdade:
+00:03:56,577 --> 00:03:59,009
+Clara: Marquei para terça, às nove.
 
 88
-00:04:37,127 --> 00:04:39,611
-a IA chegou a dizer que o SAMU era 112,
+00:03:59,030 --> 00:04:01,938
+Clara: Eu mando um áudio na segunda para lembrar.
 
 89
-00:04:39,461 --> 00:04:43,098
-e a pedir um transporte antes de a pessoa dizer sim.
+00:04:01,958 --> 00:04:05,150
+E a agente Rosa sabe quem precisa de uma visita hoje,
 
 90
-00:04:42,948 --> 00:04:47,167
-Corrigimos, e travamos no código o que não pode depender só da IA.
+00:04:05,170 --> 00:04:07,669
+começando por quem não tem telefone.
 
 91
-00:04:47,917 --> 00:04:50,062
-Medimos também o viés do modelo:
+00:04:07,689 --> 00:04:08,626
+Por trás disso:
 
 92
-00:04:49,912 --> 00:04:55,018
-ele quase não colocava idosos na fila de contato, porque na média eles faltam menos.
+00:04:08,646 --> 00:04:11,608
+voz em tempo real com o Gemini, telefonia pela Twilio,
 
 93
-00:04:54,868 --> 00:04:56,077
-Corrigimos:
+00:04:11,628 --> 00:04:14,941
+e um modelo que prevê quem tem mais risco de faltar,
 
 94
-00:04:55,927 --> 00:04:59,452
-quem tem barreira de acesso sempre recebe contato.
+00:04:14,961 --> 00:04:17,990
+treinado com 110 mil consultas reais do SUS.
 
 95
-00:04:59,302 --> 00:05:03,445
-E ações que não têm volta ficam travadas no código até a pessoa confirmar.
+00:04:19,212 --> 00:04:21,572
+Mas o que mais nos orgulha é a governança.
 
 96
-00:05:05,263 --> 00:05:06,022
-Funciona?
+00:04:21,592 --> 00:04:25,103
+Uma bateria de testes com perguntas difíceis roda a cada mudança,
 
 97
-00:05:05,872 --> 00:05:10,893
-Num estudo com 306 pacientes no Hospital das Clínicas de Ribeirão Preto,
+00:04:25,123 --> 00:04:28,038
+e hoje a Clara passa em 17 de 17.
 
 98
-00:05:10,743 --> 00:05:14,885
-as faltas caíram para 9,5% com ligação, contra 21% com SMS.
+00:04:28,058 --> 00:04:30,350
+Os testes encontraram erros de verdade:
 
 99
-00:05:14,735 --> 00:05:17,781
-Num município de 100 mil habitantes,
+00:04:30,370 --> 00:04:31,910
+a IA chegou a dizer que o SAMU era 112,
 
 100
-00:05:17,631 --> 00:05:22,770
-estimamos recuperar cerca de 4.500 consultas com especialista por ano,
+00:04:31,930 --> 00:04:35,260
+e a pedir um transporte antes de a pessoa dizer sim.
 
 101
-00:05:22,620 --> 00:05:25,110
-a R$ 32 por vaga recuperada.
+00:04:35,280 --> 00:04:39,230
+Corrigimos, e travamos no código o que não pode depender só da IA.
 
 102
-00:05:25,860 --> 00:05:29,361
-Para a prefeitura, isso custa R$ 0,12 por habitante por mês,
+00:04:40,055 --> 00:04:42,323
+Medimos também o viés do modelo:
 
 103
-00:05:29,211 --> 00:05:32,760
-com retorno estimado de R$ 3 para cada R$ 1 investido.
+00:04:42,343 --> 00:04:44,989
+ele quase não colocava idosos na fila de contato,
 
 104
-00:05:32,610 --> 00:05:34,345
-E é o momento certo:
+00:04:45,009 --> 00:04:47,417
+porque na média eles faltam menos.
 
 105
-00:05:34,195 --> 00:05:36,621
-a lei de linguagem simples, de 2025,
+00:04:47,437 --> 00:04:48,340
+Corrigimos:
 
 106
-00:05:36,471 --> 00:05:40,251
-obriga todo órgão público a falar de um jeito que todos entendam.
+00:04:48,360 --> 00:04:51,249
+quem tem barreira de acesso sempre recebe contato.
 
 107
-00:05:40,101 --> 00:05:44,624
-E a prefeitura pode contratar um piloto pelo Marco Legal das Startups.
+00:04:51,269 --> 00:04:54,669
+E ações que não têm volta ficam travadas no código até a pessoa
 
 108
-00:05:45,799 --> 00:05:48,778
-Na semana que vem, o Seu Antônio vai à consulta.
+00:04:54,689 --> 00:04:55,989
+confirmar.
 
 109
-00:05:48,628 --> 00:05:51,001
-O carro da prefeitura passa às oito.
+00:04:56,965 --> 00:04:57,910
+Funciona?
 
 110
-00:05:50,851 --> 00:05:53,812
-A tecnologia certa não exige que a pessoa mude.
+00:04:57,930 --> 00:05:01,449
+Num estudo com 306 pacientes no Hospital das Clínicas de Ribeirão
 
 111
-00:05:53,662 --> 00:05:55,754
-Ela vai até a pessoa.
+00:05:01,468 --> 00:05:07,875
+Preto, as faltas caíram para 9,5% com ligação, contra 21% com SMS.
 
 112
-00:05:55,604 --> 00:05:56,053
-Clara.
+00:05:07,895 --> 00:05:09,774
+Num município de 100 mil habitantes,
 
 113
-00:05:55,903 --> 00:05:58,168
-O serviço público que chega em você.
+00:05:09,793 --> 00:05:13,590
+estimamos recuperar cerca de 4.500 consultas com especialista por
+
+114
+00:05:13,610 --> 00:05:17,222
+ano, a R$ 32 por vaga recuperada.
+
+115
+00:05:17,242 --> 00:05:21,102
+Para a prefeitura, isso custa R$ 0,12 por habitante por mês,
+
+116
+00:05:21,122 --> 00:05:24,557
+com retorno estimado de R$ 3 para cada R$ 1 investido.
+
+117
+00:05:24,577 --> 00:05:25,989
+E é o momento certo:
+
+118
+00:05:26,009 --> 00:05:28,109
+a lei de linguagem simples, de 2025,
+
+119
+00:05:28,129 --> 00:05:32,469
+obriga todo órgão público a falar de um jeito que todos entendam.
+
+120
+00:05:32,489 --> 00:05:35,249
+E a prefeitura pode contratar um piloto pelo Marco Legal das
+
+121
+00:05:35,269 --> 00:05:36,569
+Startups.
+
+122
+00:05:36,876 --> 00:05:39,389
+Na semana que vem, o Seu Antônio vai à consulta.
+
+123
+00:05:39,408 --> 00:05:41,392
+O carro da prefeitura passa às oito.
+
+124
+00:05:41,412 --> 00:05:44,384
+A tecnologia certa não exige que a pessoa mude.
+
+125
+00:05:44,404 --> 00:05:45,704
+Ela vai até a pessoa.
+
+126
+00:05:46,653 --> 00:05:48,853
+Clara. O serviço público que chega em você.
 
